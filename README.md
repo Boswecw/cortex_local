@@ -14,7 +14,7 @@ This directory starts with constitutional artifacts first:
 
 Current status:
 
-- Wave 1 constitutional scaffold created from `cortex_constitutional_project_plan_v_2.md`
+- Wave 1 constitutional scaffold created from `docs/planning/general/cortex_constitutional_project_plan_v_2.md`
 - Wave 2 and Wave 3 contract/schema enforcement in place
 - Runtime Slice 1 intake validation path implemented against `schemas/intake-request.schema.json`
 - Runtime Slice 2 syntax-only extraction emission path implemented for bounded local `.md` and `.txt` sources
@@ -29,6 +29,7 @@ Current status:
 - Post-Slice-7 hardening pass completed for contract symmetry, ugly-case lane coverage, operator-surface consistency, and future lane-admission governance
 - Post-Slice-8 governance selection executed through Slice 9; EPUB is now admitted
 - Post-Slice-9 governance selection completed; Scrivener is now the next planning target on a special-track project-source path, and HTML remains deferred
+- Special-track Scrivener Stage 1 authority recon runtime slice implemented; Scrivener remains unadmitted, and extraction plus broader Scrivener implementation remain blocked
 
 Start here:
 
@@ -82,6 +83,10 @@ Runtime Slice 9:
 - emit a syntax-only extraction result from a bounded local EPUB source: `python -m cortex_runtime.extraction_emission --source-path tests/runtime/fixtures/sample-note.epub --request-id epub-001 --source-ref epub-local --media-type application/epub+zip`
 - emit a retrieval package from the same bounded local EPUB lane: `python -m cortex_runtime.retrieval_package_emission --source-path tests/runtime/fixtures/sample-note.epub --request-id epub-001 --source-ref epub-local --media-type application/epub+zip`
 
+Scrivener Stage 1 Authority Recon:
+
+- emit bounded status-only authority recon from one local `.scriv` project directory: `python -m cortex_runtime.scrivener_authority_recon --source-path fixtures/scrivener/positive/scriv-mixed-structure-sanitized-v1/scriv-mixed-structure-sanitized-v1.scriv --request-id scriv-stage1-001 --source-ref scriv-local`
+
 Admission governance:
 
 - audit current lane symmetry before expanding admitted surfaces: `docs/source-lanes/contract-symmetry-audit.md`
@@ -96,4 +101,6 @@ Admission governance:
 - review the historical EPUB planning draft: `docs/contracts/source-lane-epub-draft.md`
 - review the post-Slice-8 selection ADR: `DECISIONS/0012-next-lane-selection-after-slice8.md`
 - review the Scrivener special-track planning draft: `docs/contracts/source-lane-scrivener-draft.md`
+- review the Scrivener three-project comparative evidence review: `docs/source-lanes/scrivener/three-project-comparative-evidence-review.md`
 - review the post-Slice-9 selection ADR: `DECISIONS/0014-next-lane-selection-after-slice9.md`
+- review the Stage 1-only Scrivener authorization ADR: `DECISIONS/0015-scrivener-stage1-authority-recon-authorization.md`

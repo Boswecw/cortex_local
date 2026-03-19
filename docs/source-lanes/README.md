@@ -32,7 +32,14 @@ Governance references in this directory:
 - `lane-admission-playbook.md`
 - `contract-symmetry-audit.md`
 - `scrivener/` (phase-0 evidence packet)
-- `scrivener/authority-recon-slice-plan.md` (conditional build packet, still blocked)
+- `scrivener/authority-recon-status-semantics.md` (Stage 1 status boundary note, still non-authorizing)
+- `scrivener/authority-recon-correspondence-semantics.md` (Stage 1 degraded-correspondence boundary note, still non-authorizing)
+- `scrivener/three-project-comparative-evidence-review.md` (three-clean-project comparative review, still non-authorizing)
+- `scrivener/authority-recon-slice-plan.md` (Stage 1-only build packet, authorized only through Decision 0015)
+- `scrivener/stage1-post-implementation-review.md` (post-implementation governance review; may open Stage 2 planning only)
+- `scrivener/stage2-planning-packet.md` (bounded Stage 2 planning only; still non-authorizing)
+- `scrivener/stage2-manuscript-eligibility-scope.md` (candidate-only manuscript-eligibility planning seam; still non-authorizing)
+- `../../DECISIONS/0015-scrivener-stage1-authority-recon-authorization.md` (Stage 1-only Scrivener authorization decision; lane still unadmitted)
 - `../fixtures/scrivener/` (canonical fixture intake packet)
 - `next-lane-candidate-matrix.md` (historical, pre-ODT)
 - `next-lane-candidate-matrix-v2.md` (historical, pre-Slice-9)

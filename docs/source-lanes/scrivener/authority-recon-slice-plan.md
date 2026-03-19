@@ -2,10 +2,11 @@
 
 ## Status
 
-Conditional Stage 1 plan only.
+Authorized and implemented Stage 1 plan only.
 
-This plan is build-ready but does not authorize implementation by itself.
-The Scrivener gate remains blocked.
+This plan is authorized only through `DECISIONS/0015-scrivener-stage1-authority-recon-authorization.md`.
+It does not authorize manuscript extraction, research extraction, lane admission, or broader Scrivener support.
+The broader Scrivener gate remains blocked beyond Stage 1.
 
 ## Purpose
 
@@ -13,6 +14,11 @@ This note turns the current Scrivener evidence base into a bounded first-slice p
 
 The slice answers structural truth questions.
 It does not emit manuscript content.
+
+Stage 1 status meanings for this plan are further tightened in:
+
+- `docs/source-lanes/scrivener/authority-recon-status-semantics.md`
+- `docs/source-lanes/scrivener/authority-recon-correspondence-semantics.md`
 
 ## Stage 1 scope
 
@@ -43,8 +49,9 @@ The slice must not:
 | no `*.scrivx` candidate is resolvable | `unavailable` | trust cannot begin |
 | multiple conflicting `*.scrivx` candidates are present | `unavailable` | authority ambiguous |
 | `*.scrivx` is malformed or unreadable | `unavailable` | fail closed on authority trust |
+| directly expected correspondence for observed binder or item surfaces is missing or incomplete | `unavailable` | do not treat degraded correspondence as `ready` |
 | required package surfaces are missing | `unavailable` | structure not trustworthy |
-| candidate mapping can be stated only as unresolved | `ready` with constrained mapping status | honest observation without extraction permission |
+| candidate mapping can be stated only as unresolved and no direct correspondence incompleteness is observed | `ready` with constrained mapping status | honest observation without extraction permission |
 | package state falls outside current evidence bounds | `unavailable` | do not invent repair behavior |
 
 ## Test plan outline
@@ -58,6 +65,7 @@ Positive structural tests:
 Negative structural tests:
 
 - malformed authority fixture yields `unavailable`
+- directly incomplete correspondence fixture yields `unavailable`
 - package resemblance without readable authority is insufficient
 - fail-closed reason details remain structural only
 
@@ -69,7 +77,7 @@ Comparison tests:
 Future ambiguity tests, not yet satisfiable:
 
 - partial-package states
-- multi-authority ambiguity
+- degraded-correspondence cases beyond the direct missing or incomplete rule
 - mapping-present but policy-ambiguous manuscript roots
 - version-drift or migrated project shapes
 
@@ -82,6 +90,9 @@ Future ambiguity tests, not yet satisfiable:
 5. Observe binder identifiers and candidate `Files/Data/<UUID>/...` correspondences without making inclusion decisions.
 6. Emit a status-first result using the authority-recon draft contract.
 7. Stop. Do not continue into manuscript extraction without separate approval.
+
+If a case falls into the unresolved semantics described in `authority-recon-status-semantics.md`, stop and fail closed rather than invent a narrower runtime rule.
+If a case falls into the degraded-correspondence boundary described in `authority-recon-correspondence-semantics.md`, do not upgrade it to `ready` by convenience.
 
 ## Exit conditions for this slice
 

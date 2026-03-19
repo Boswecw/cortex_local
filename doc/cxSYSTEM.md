@@ -1,6 +1,6 @@
 # Cortex - System Documentation
 
-**Document version:** 1.10 (2026-03-19) - Aligned to current constitutional and runtime repo state
+**Document version:** 1.11 (2026-03-19) - Aligned to current constitutional and runtime repo state
 **Protocol:** Forge Documentation Protocol v1
 
 | Key | Value |
@@ -10,7 +10,7 @@
 | **Output** | `doc/cxSYSTEM.md` |
 
 This `doc/system/` tree is the assembled system reference for Cortex as a bounded local file-intelligence service.
-It reflects the current repo state through Wave 3 hardening, audit-remediation tightening, the shared source-lane framework, Runtime Slices 1 through 9, the post-Slice-7 hardening and lane-admission-governance pass, bounded ODT lane delivery, bounded EPUB lane delivery, the post-Slice-8 governance execution, and the post-Slice-9 governance selection.
+It reflects the current repo state through Wave 3 hardening, audit-remediation tightening, the shared source-lane framework, Runtime Slices 1 through 9, the post-Slice-7 hardening and lane-admission-governance pass, bounded ODT lane delivery, bounded EPUB lane delivery, the post-Slice-8 governance execution, the post-Slice-9 governance selection, and the bounded special-track Scrivener Stage 1 authority-recon runtime slice.
 
 Assembly contract:
 
@@ -86,6 +86,7 @@ The currently implemented executable runtime surfaces are:
 - Slice 7 - bounded local RTF source lane
 - Slice 8 - bounded local ODT source lane
 - Slice 9 - bounded local EPUB source lane
+- Slice 10 - special-track Scrivener Stage 1 authority recon, status-only only
 
 The currently admitted source lanes remain narrow:
 
@@ -96,6 +97,9 @@ The currently admitted source lanes remain narrow:
 - local `.rtf`
 - local `.odt`
 - local `.epub`
+
+Scrivener is not admitted as a source lane.
+Only the bounded Stage 1 authority-recon runtime slice is implemented.
 
 This is the current bounded baseline, not a promise of broader source or control-surface expansion.
 
@@ -261,6 +265,7 @@ It does not become a raw-content channel or downstream coordination surface.
 Runtime Slice 4 now emits one governed service-status path from bounded local runtime truth only.
 It reports implemented runtime slices, admitted source lanes, zero active watcher scopes, and ready/degraded/unavailable posture without adding recommendation or control-plane behavior.
 The admitted-source-lane report is now driven from the shared lane registry rather than ad hoc extraction-module inspection.
+Special-track runtime slices implemented without lane admission may appear in implemented-slice reporting only; the current example is Scrivener Stage 1 authority recon.
 Future lane work is now expected to pass a reusable admission playbook before implementation begins.
 
 ## Handoff envelope
@@ -526,6 +531,17 @@ The current governance phase adds:
 
 This phase does not add runtime behavior, schema changes, or a new admitted lane.
 
+## Scrivener Stage 1 authority-recon delivery
+
+The current special-track implementation phase adds:
+
+- one bounded Scrivener Stage 1 authority-recon runtime slice only
+- one status-only contract and schema surface for `ready`, `denied`, and `unavailable` outcomes
+- bounded runtime coverage for singular-authority, missing-authority, multi-authority, malformed-authority, unsupported-source, operator-disabled, and directly incomplete-correspondence cases
+- service-status reporting for the implemented special-track slice without promoting Scrivener into the admitted source-lane set
+
+This phase does not add Scrivener extraction, manuscript-policy handling, generalized Scrivener schemas, or lane admission.
+
 ## Delivery order
 
 The current delivery order remains:
@@ -558,12 +574,13 @@ The current remediation pass adds:
 
 The repo is currently strongest where constitutional claims are backed by schemas, invalid fixtures, and validator guard checks.
 
-Slices 1 through 9 now form the current bounded runtime baseline.
+Slices 1 through 9 plus the special-track Scrivener Stage 1 authority-recon slice now form the current bounded runtime baseline.
 This baseline has also been hardened for contract symmetry, operator consistency, and future lane-admission governance.
 EPUB is now admitted as a bounded local source lane.
-Scrivener is now the next governance-selected planning target through an explicit special-track project-source path.
+Scrivener remains a special-track project-source opening rather than an admitted source lane.
+Only the bounded Stage 1 authority-recon runtime slice is implemented.
 HTML remains deferred.
-No further implementation target is implied by this system reference alone beyond that planning authorization.
+No further implementation target is implied by this system reference alone beyond that bounded Stage 1 authorization.
 Any future lane work must still be explicit, narrow, and anchored to the governing plan rather than inferred from planning momentum alone.
 
 This assembled system doc is therefore a control reference, not a product or roadmap document.

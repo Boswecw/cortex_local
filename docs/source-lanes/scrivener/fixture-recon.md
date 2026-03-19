@@ -2,7 +2,7 @@
 
 ## Status
 
-Blocked pending compatibility fixture acquisition plus remaining authority, mapping, and irregular-breadth proof.
+Blocked pending compatibility fixture acquisition plus remaining authority, mapping, and broader irregular-breadth proof.
 
 ## Scope
 
@@ -32,6 +32,12 @@ Search result:
 - packet-local `corruption-note.md` records removal of `Files/Data/A5101A53-7D7B-425D-82F0-A2FDF9F156F5/content.rtf` while leaving readable authority intact
 - direct local archive inspection shows no `Files/Data/A5101A53-7D7B-425D-82F0-A2FDF9F156F5/content.rtf` entry in the negative packet, while the corresponding clean sibling retains that file
 - the retained missing-content archive is stored as `fixtures/scrivener/negative/the-heart-of-the-storm-sanitized-missing-content-negative-fixture/the-heart-of-the-storm-sanitized-missing-content-negative-fixture.zip`
+- one extracted sanitized-derived multi-authority negative fixture now exists at `fixtures/scrivener/negative/symbiogenesis-gunnach-protocol-sanitized-multi-authority-negative-fixture/`
+- direct local inspection shows two top-level readable authority candidates, `Symbiogenesis - Gunnach Protocol.scrivx` and `Symbiogenesis - Gunnach Protocol - conflicting.scrivx`, inside the same package-shaped root
+- direct local comparison shows the original authority candidate shares `Identifier="F101AD8E-09AC-4698-9380-3580DC648872"`, `Creator="SCRWIN-3.1.6.0"`, project `Version="2.0"`, and repeated binder/data UUIDs with `scriv-mixed-structure-sanitized-v1`
+- direct local inspection of the conflicting authority candidate shows altered authority-identifying metadata including `Identifier="CONFLICTING-SANITIZED-AUTHORITY"` and `Creator="SCRWIN-CONFLICT"` while the surrounding binder UUID structure remains readable
+- packet-local `corruption-note.md` records that the readable original sanitized `*.scrivx` was retained and a second conflicting top-level `*.scrivx` copy was added
+- the retained multi-authority archive is stored as `fixtures/scrivener/negative/symbiogenesis-gunnach-protocol-sanitized-multi-authority-negative-fixture/symbiogenesis-gunnach-protocol-sanitized-multi-authority-negative-fixture.zip`
 - one extracted sanitized derivative fixture now exists at `fixtures/scrivener/positive/scriv-mixed-structure-sanitized-v1/`
 - the extracted positive fixture contains `scriv-mixed-structure-sanitized-v1.scriv/` with top-level `scriv-mixed-structure-sanitized-v1.scrivx`
 - direct local inspection of the second fixture shows `DraftFolder`, `ResearchFolder`, `TrashFolder`, `TemplateFolderUUID`, and `BookmarksFolderUUID` surfaces in `.scrivx`
@@ -53,15 +59,18 @@ Search result:
 
 Implication:
 
-- there are now five active local Scrivener evidence packets available for read-only inspection plus one superseded raw-derived audit packet
+- there are now six active local Scrivener evidence packets available for read-only inspection plus one superseded raw-derived audit packet
 - single-fixture overfitting risk is reduced, but not replaced by admission-grade proof
 - one source lineage now has an explicit same-source clean baseline plus malformed-authority negative pair, which narrows provenance ambiguity around the fail-closed authority claim
 - one additional source lineage now has an explicit same-source clean baseline plus readable-authority missing-content negative pair, which narrows provenance ambiguity around unavailable-content evidence
+- the mixed-structure source lineage now also has an explicit clean baseline plus multi-authority negative pair, which narrows provenance ambiguity around ambiguous-authority evidence
 - the second fixture adds direct mixed-structure observation across draft, research, trash, template, and bookmark surfaces
 - candidate binder-item UUID to `Files/Data/<UUID>/...` linkage is now directly observable across multiple examples
+- a dedicated three-project comparative review note now records what repeats across the current clean fixtures and what still diverges materially: `docs/source-lanes/scrivener/three-project-comparative-evidence-review.md`
 - one sanitized-derived malformed-authority negative case now strengthens fail-closed evidence with cleaner provenance discipline
 - package resemblance alone is now directly shown to be insufficient when authoritative `.scrivx` XML is unreadable
 - readable authority plus package shape are now also directly shown to be insufficient to guarantee text-body availability when an expected `content.rtf` is missing
+- multiple readable top-level authority candidates are now also directly shown to require fail-closed handling rather than convenience-based selection
 - the repo still lacks compatibility coverage, broader irregular breadth, deterministic mapping proof, and proof that sanitization or restricted derivation did not remove needed admission evidence
 
 ## Current observed utility and limits
@@ -74,21 +83,25 @@ Observed utility:
 - suitable for candidate binder-to-content mapping observation in the second fixture
 - suitable for malformed-authority fail-closed observation in the sanitized-derived negative fixture
 - suitable for missing-content fail-closed observation in the new sanitized-derived negative fixture
+- suitable for multi-authority fail-closed observation in the new sanitized-derived negative fixture
 - suitable for same-source clean-vs-corrupted authority comparison in the `faith-in-a-firestorm` pair
 - suitable for same-source clean-vs-missing-content comparison in the `scriv-sanitized-fixture-v1` / `the-heart-of-the-storm-sanitized-missing-content-negative-fixture` pair
+- suitable for same-source clean-vs-multi-authority comparison in the `scriv-mixed-structure-sanitized-v1` / `symbiogenesis-gunnach-protocol-sanitized-multi-authority-negative-fixture` pair
 - suitable for provenance-discipline observation because the canonical negative packet is now derived from a sanitized derivative rather than directly from the raw source project
 - suitable as governance-only reference material
 
 Observed limits:
 
-- the current active evidence packet mixes three sanitized derivatives with two sanitized-derived negatives; the earlier raw-derived negative packet is retained only as superseded audit history
+- the current active evidence packet mixes three sanitized derivatives with three sanitized-derived negatives; the earlier raw-derived negative packet is retained only as superseded audit history
 - no compatibility or newer-version fixture exists yet
 - manuscript vs research structural distinction is now observable, but safe admission rules are not yet proven from it
 - binder hierarchy, inclusion rules, and deterministic body linkage are not yet proven as contract truth
 - research-side asset observation in the second fixture is structural only because binary payloads were removed
-- negative coverage is still narrow and currently limited to one corrupted-authority case and one missing-content case
+- negative coverage is still narrow and currently limited to one corrupted-authority case, one missing-content case, and one multi-authority case
 - the missing-content case strengthens unavailable-content evidence but does not itself prove the correct denied vs unavailable vs partial status vocabulary
+- the multi-authority case strengthens ambiguous-authority evidence but does not itself prove the correct denied vs ambiguous-authority vs unavailable status vocabulary
 - the same-source clean baseline reduces provenance ambiguity, but the canonical negative packet is still restricted evidence only and the earlier raw-derived negative packet must not be used to strengthen support claims
+- the three-project comparative review narrows Stage 1-safe authority assumptions but still recommends docs-only tightening rather than runtime authorization
 
 ## Target fixture set
 
@@ -98,6 +111,7 @@ Observed limits:
 | same-source clean baseline paired with malformed-authority sibling | present but restricted | same-source pairing narrows provenance ambiguity only; it does not establish support or gate clearance | useful for clean-vs-corrupted authority comparison |
 | mixed manuscript + research project | present but restricted | sanitized derivative and asset removal limit what can be inferred | useful for manuscript/research boundary observation |
 | malformed-authority negative project | present but restricted | one sanitized-derived corrupted-`.scrivx` case does not establish full irregular breadth | useful for fail-closed authority denial evidence |
+| multi-authority negative project | present but restricted | one sanitized-derived duplicate-`.scrivx` case does not establish full irregular breadth or final status semantics | useful for fail-closed authority ambiguity evidence |
 | simple manuscript-only project | still useful | current packet still lacks a clean baseline manuscript-only comparison | would help isolate authority from mixed-content pressure |
 | manuscript + notes or synopsis-heavy project | missing | no sanitized source project present | required to test metadata-only and note-bearing nodes |
 | nested binder and reordered items | missing | no sanitized source project present | required to prove hierarchy and ordering truth |
@@ -114,6 +128,7 @@ Current observed fixtures:
 
 - `fixtures/scrivener/ambiguous/scriv-sanitized-fixture-v1/`
 - `fixtures/scrivener/negative/faith-in-a-firestorm-sanitized-corrupt-scrivx-negative-fixture/`
+- `fixtures/scrivener/negative/symbiogenesis-gunnach-protocol-sanitized-multi-authority-negative-fixture/`
 - `fixtures/scrivener/negative/the-heart-of-the-storm-sanitized-missing-content-negative-fixture/`
 - `fixtures/scrivener/positive/faith-in-a-firestorm-sanitized-v1/`
 - `fixtures/scrivener/positive/scriv-mixed-structure-sanitized-v1/`
@@ -139,6 +154,6 @@ That optional wrapper should point back to `fixtures/scrivener/` rather than bec
 
 Fixture reconnaissance is not complete.
 
-Implementation must remain blocked until at least one compatibility-oriented fixture and broader irregular coverage exist locally for read-only inspection, with the current active five-packet evidence surface used to narrow remaining authority, admission-boundary, and deterministic mapping ambiguity.
+Implementation must remain blocked until at least one compatibility-oriented fixture and broader irregular coverage exist locally for read-only inspection, with the current active six-packet evidence surface used to narrow remaining authority, admission-boundary, and deterministic mapping ambiguity.
 
 The retained raw-derived negative packet is audit history only and must not be used as canonical support evidence.

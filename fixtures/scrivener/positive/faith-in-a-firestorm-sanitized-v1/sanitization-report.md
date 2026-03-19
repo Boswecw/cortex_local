@@ -2,7 +2,7 @@
 
 ## Source
 
-- raw source archive: `docs/Faith in a Firestorm.scriv-20260319T124826Z-1-001.zip`
+- raw source archive: `docs/source-lanes/scrivener/source-archive-staging/Faith in a Firestorm.scriv-20260319T124826Z-1-001.zip`
 - same-source canonical negative packet: `fixtures/scrivener/negative/faith-in-a-firestorm-sanitized-corrupt-scrivx-negative-fixture/`
 - output archive: `faith-in-a-firestorm-sanitized-v1.zip`
 - output project: `faith-in-a-firestorm-sanitized-v1.scriv`

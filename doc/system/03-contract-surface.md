@@ -86,6 +86,7 @@ It does not become a raw-content channel or downstream coordination surface.
 Runtime Slice 4 now emits one governed service-status path from bounded local runtime truth only.
 It reports implemented runtime slices, admitted source lanes, zero active watcher scopes, and ready/degraded/unavailable posture without adding recommendation or control-plane behavior.
 The admitted-source-lane report is now driven from the shared lane registry rather than ad hoc extraction-module inspection.
+Special-track runtime slices implemented without lane admission may appear in implemented-slice reporting only; the current example is Scrivener Stage 1 authority recon.
 Future lane work is now expected to pass a reusable admission playbook before implementation begins.
 
 ## Handoff envelope

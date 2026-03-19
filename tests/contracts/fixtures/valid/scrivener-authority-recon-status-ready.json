@@ -1,0 +1,53 @@
+{
+  "artifact_id": "scriv-recon-1234567890abcdef",
+  "request_id": "scriv-stage1-001",
+  "source_ref": "scriv-local",
+  "state": "ready",
+  "observation_boundary": "status_only",
+  "semantic_boundary_enforced": true,
+  "authority_status": {
+    "state": "single_authority_observed",
+    "candidate_count": 1,
+    "candidate_paths": [
+      "Sample.scrivx"
+    ],
+    "resolved_authority_path": "/tmp/Sample.scriv/Sample.scrivx",
+    "operator_visible_summary": "Exactly one top-level readable .scrivx authority candidate was resolved."
+  },
+  "package_status": {
+    "state": "package_observed",
+    "data_root_present": true,
+    "operator_visible_summary": "A package-shaped .scriv container with readable authority and required structural surfaces was observed."
+  },
+  "mapping_status": {
+    "state": "mapping_unresolved",
+    "mirrored_uuid_count": 12,
+    "binder_only_uuid_count": 3,
+    "data_only_uuid_count": 4,
+    "direct_missing_content_target_count": 0,
+    "operator_visible_summary": "Authority and binder identity are readable, but correspondence remains structurally unresolved at Stage 1."
+  },
+  "observed_role_surfaces": [
+    "draft",
+    "research",
+    "trash",
+    "template",
+    "bookmarks"
+  ],
+  "observed_binder_summary": {
+    "binder_item_count": 24,
+    "top_level_binder_item_count": 5,
+    "max_binder_depth": 3
+  },
+  "provenance": {
+    "source_hash": "sha256:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+    "observer_version": "slice10.scrivener_stage1.1",
+    "source_modified_at": "2026-03-19T00:00:00Z",
+    "byte_count": 4096,
+    "source_lane_candidate": "scrivener_project",
+    "project_container_path": "/tmp/Sample.scriv",
+    "authority_basis": "single_top_level_scrivx",
+    "authority_path": "/tmp/Sample.scriv/Sample.scrivx"
+  },
+  "observed_at": "2026-03-19T00:00:00Z"
+}

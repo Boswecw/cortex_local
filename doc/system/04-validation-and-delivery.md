@@ -187,6 +187,17 @@ The current governance phase adds:
 
 This phase does not add runtime behavior, schema changes, or a new admitted lane.
 
+## Scrivener Stage 1 authority-recon delivery
+
+The current special-track implementation phase adds:
+
+- one bounded Scrivener Stage 1 authority-recon runtime slice only
+- one status-only contract and schema surface for `ready`, `denied`, and `unavailable` outcomes
+- bounded runtime coverage for singular-authority, missing-authority, multi-authority, malformed-authority, unsupported-source, operator-disabled, and directly incomplete-correspondence cases
+- service-status reporting for the implemented special-track slice without promoting Scrivener into the admitted source-lane set
+
+This phase does not add Scrivener extraction, manuscript-policy handling, generalized Scrivener schemas, or lane admission.
+
 ## Delivery order
 
 The current delivery order remains:
@@ -219,12 +230,13 @@ The current remediation pass adds:
 
 The repo is currently strongest where constitutional claims are backed by schemas, invalid fixtures, and validator guard checks.
 
-Slices 1 through 9 now form the current bounded runtime baseline.
+Slices 1 through 9 plus the special-track Scrivener Stage 1 authority-recon slice now form the current bounded runtime baseline.
 This baseline has also been hardened for contract symmetry, operator consistency, and future lane-admission governance.
 EPUB is now admitted as a bounded local source lane.
-Scrivener is now the next governance-selected planning target through an explicit special-track project-source path.
+Scrivener remains a special-track project-source opening rather than an admitted source lane.
+Only the bounded Stage 1 authority-recon runtime slice is implemented.
 HTML remains deferred.
-No further implementation target is implied by this system reference alone beyond that planning authorization.
+No further implementation target is implied by this system reference alone beyond that bounded Stage 1 authorization.
 Any future lane work must still be explicit, narrow, and anchored to the governing plan rather than inferred from planning momentum alone.
 
 This assembled system doc is therefore a control reference, not a product or roadmap document.

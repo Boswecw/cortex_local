@@ -1,17 +1,23 @@
 # Cortex Draft Contract - Scrivener Authority Recon
 
-Governance note only. This draft defines a conditional Stage 1 status contract for Scrivener authority reconnaissance. It does not admit the Scrivener lane and does not authorize runtime implementation by itself.
+Governance note only. This draft defines the bounded Stage 1 status contract for Scrivener authority reconnaissance. It does not admit the Scrivener lane and does not authorize runtime implementation by itself.
 
 ## Status
 
-Conditional draft for blocked implementation posture only.
+Conditional draft for Stage 1-only authorized and implemented posture.
 
 ## Purpose
 
-This document defines the maximum honest first runtime contract the current Scrivener evidence can support if governance later authorizes a bounded build.
+This document defines the maximum honest first runtime contract the current Scrivener evidence can support under `DECISIONS/0015-scrivener-stage1-authority-recon-authorization.md`.
 
 The contract is status-first, not content-first.
 It exists only to answer whether bounded project authority and candidate mapping surfaces can be observed honestly.
+The current bounded implementation is `cortex_runtime/scrivener_authority_recon.py`.
+
+Status-boundary hardening for this draft is recorded in:
+
+- `docs/source-lanes/scrivener/authority-recon-status-semantics.md`
+- `docs/source-lanes/scrivener/authority-recon-correspondence-semantics.md`
 
 ## 1. Input boundary
 
@@ -73,6 +79,7 @@ It does not mean Scrivener manuscript extraction is ready.
 - package shape can be described honestly
 - binder identifier surfaces can be observed
 - mapping posture can be stated honestly, even if the result is `mapping_unresolved`
+- no directly incomplete or missing expected correspondence requires fail-closed `unavailable`
 
 ## 5. `denied` posture
 
@@ -97,10 +104,14 @@ This includes:
 - no resolvable `*.scrivx` candidate
 - multiple conflicting `*.scrivx` candidates
 - malformed or unreadable `*.scrivx`
+- readable authority plus directly incomplete or missing expected correspondence for observed binder or item surfaces
 - missing required structural surfaces
 - package states outside currently observed evidence bounds
 
 Malformed authority should be treated as unavailable by default in this draft because trust failed before any out-of-lane policy judgment could be made.
+
+Readable-authority degraded-correspondence cases are further narrowed by `docs/source-lanes/scrivener/authority-recon-correspondence-semantics.md`.
+Edge cases beyond that narrowed rule remain governed by the fail-closed boundary note in `docs/source-lanes/scrivener/authority-recon-status-semantics.md`.
 
 ## 7. Mapping posture
 
@@ -114,7 +125,8 @@ Allowed Stage 1 mapping summaries:
 - `mapping_unavailable`
 
 `candidate_mapping_observed` does not authorize manuscript extraction.
-`mapping_unresolved` does not by itself require `denied` if the observation result can still be reported honestly.
+`mapping_unresolved` does not by itself require `denied` if the observation result can still be reported honestly and no direct correspondence incompleteness requires `unavailable`.
+`mapping_unavailable` is required when directly expected correspondence is missing or incomplete for the observed structural surface.
 
 ## 8. `partial_success` posture
 
@@ -148,4 +160,8 @@ This draft must not drift into:
 
 This draft is build-ready but not self-authorizing.
 
-If governance later authorizes a bounded first slice, implementation should begin from this contract and the Stage 1 slice plan in `docs/source-lanes/scrivener/authority-recon-slice-plan.md`.
+Decision 0015 authorizes bounded Stage 1 authority recon only.
+Implementation must begin from this contract and the Stage 1 slice plan in `docs/source-lanes/scrivener/authority-recon-slice-plan.md`.
+
+It should also honor the settled-vs-unresolved status meanings in `docs/source-lanes/scrivener/authority-recon-status-semantics.md`.
+It should also honor the degraded-correspondence boundary in `docs/source-lanes/scrivener/authority-recon-correspondence-semantics.md`.

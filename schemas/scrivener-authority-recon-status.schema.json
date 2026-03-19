@@ -1,0 +1,339 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://boswelldigitalsolutions.com/schemas/cortex/scrivener-authority-recon-status.schema.json",
+  "title": "Cortex Scrivener Authority Recon Status",
+  "description": "Bounded Stage 1 Scrivener authority-recon status envelope for Cortex.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_id",
+    "request_id",
+    "source_ref",
+    "state",
+    "observation_boundary",
+    "semantic_boundary_enforced",
+    "authority_status",
+    "package_status",
+    "mapping_status",
+    "observed_role_surfaces",
+    "observed_binder_summary",
+    "provenance",
+    "observed_at"
+  ],
+  "properties": {
+    "artifact_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "source_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "ready",
+        "denied",
+        "unavailable"
+      ]
+    },
+    "observation_boundary": {
+      "type": "string",
+      "const": "status_only"
+    },
+    "semantic_boundary_enforced": {
+      "type": "boolean",
+      "const": true
+    },
+    "authority_status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "candidate_count",
+        "candidate_paths",
+        "operator_visible_summary"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "single_authority_observed",
+            "missing_authority",
+            "ambiguous_authority",
+            "malformed_authority",
+            "not_attempted"
+          ]
+        },
+        "candidate_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "candidate_paths": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          }
+        },
+        "resolved_authority_path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "operator_visible_summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        }
+      }
+    },
+    "package_status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "data_root_present",
+        "operator_visible_summary"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "package_observed",
+            "package_unavailable",
+            "not_attempted"
+          ]
+        },
+        "data_root_present": {
+          "type": "boolean"
+        },
+        "operator_visible_summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        }
+      }
+    },
+    "mapping_status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "mirrored_uuid_count",
+        "binder_only_uuid_count",
+        "data_only_uuid_count",
+        "direct_missing_content_target_count",
+        "operator_visible_summary"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "candidate_mapping_observed",
+            "mapping_unresolved",
+            "mapping_ambiguous",
+            "mapping_unavailable",
+            "not_attempted"
+          ]
+        },
+        "mirrored_uuid_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "binder_only_uuid_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "data_only_uuid_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "direct_missing_content_target_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "operator_visible_summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        }
+      }
+    },
+    "observed_role_surfaces": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "draft",
+          "research",
+          "trash",
+          "template",
+          "bookmarks"
+        ]
+      }
+    },
+    "observed_binder_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "binder_item_count",
+        "top_level_binder_item_count",
+        "max_binder_depth"
+      ],
+      "properties": {
+        "binder_item_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "top_level_binder_item_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_binder_depth": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_hash",
+        "observer_version",
+        "source_modified_at",
+        "byte_count",
+        "source_lane_candidate",
+        "project_container_path",
+        "authority_basis"
+      ],
+      "properties": {
+        "source_hash": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "observer_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "source_modified_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "byte_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_lane_candidate": {
+          "type": "string",
+          "const": "scrivener_project"
+        },
+        "project_container_path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "authority_basis": {
+          "type": "string",
+          "enum": [
+            "single_top_level_scrivx",
+            "missing_top_level_scrivx",
+            "ambiguous_top_level_scrivx",
+            "malformed_top_level_scrivx",
+            "not_attempted"
+          ]
+        },
+        "authority_path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        }
+      }
+    },
+    "refusal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reason_class",
+        "operator_visible_summary"
+      ],
+      "properties": {
+        "reason_class": {
+          "type": "string",
+          "enum": [
+            "semantic_request_not_allowed",
+            "privacy_scope_violation",
+            "integrity_failed",
+            "ineligible_source",
+            "unsupported_source_type",
+            "dependency_unavailable",
+            "operator_disabled"
+          ]
+        },
+        "operator_visible_summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        }
+      }
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "enum": [
+              "denied",
+              "unavailable"
+            ]
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "required": [
+          "refusal"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "ready"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "not": {
+          "required": [
+            "refusal"
+          ]
+        }
+      }
+    }
+  ]
+}

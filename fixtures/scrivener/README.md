@@ -25,6 +25,7 @@ Fixtures in this directory may be used for:
 - compatibility characterization
 - same-source clean vs malformed-authority comparison when provenance is explicit
 - same-source clean vs missing-content comparison when provenance is explicit
+- same-source clean vs multi-authority comparison when provenance is explicit
 - future contract tests after explicit lane admission
 
 Fixtures in this directory may not be used to justify:
@@ -130,6 +131,7 @@ If Scrivener is admitted later, these fixtures may be promoted into contract tes
 
 - authority detection
 - admission decisions
+- ambiguous-authority fail-closed behavior
 - content-location correctness
 - denied and unsupported diagnostics
 - missing-content fail-closed behavior

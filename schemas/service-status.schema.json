@@ -163,7 +163,8 @@
               "slice6_docx_source_lane",
               "slice7_rtf_source_lane",
               "slice8_odt_source_lane",
-              "slice9_epub_source_lane"
+              "slice9_epub_source_lane",
+              "slice10_scrivener_stage1_authority_recon"
             ]
           }
         },

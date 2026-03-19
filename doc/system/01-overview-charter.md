@@ -50,6 +50,7 @@ The currently implemented executable runtime surfaces are:
 - Slice 7 - bounded local RTF source lane
 - Slice 8 - bounded local ODT source lane
 - Slice 9 - bounded local EPUB source lane
+- Slice 10 - special-track Scrivener Stage 1 authority recon, status-only only
 
 The currently admitted source lanes remain narrow:
 
@@ -60,6 +61,9 @@ The currently admitted source lanes remain narrow:
 - local `.rtf`
 - local `.odt`
 - local `.epub`
+
+Scrivener is not admitted as a source lane.
+Only the bounded Stage 1 authority-recon runtime slice is implemented.
 
 This is the current bounded baseline, not a promise of broader source or control-surface expansion.
 

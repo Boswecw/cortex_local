@@ -2,7 +2,7 @@
 
 ## Source
 
-Derived from the uploaded archive `Faith in a Firestorm.scriv-20260319T124826Z-1-001.zip`.
+Derived from the staged raw archive `docs/source-lanes/scrivener/source-archive-staging/Faith in a Firestorm.scriv-20260319T124826Z-1-001.zip`.
 
 ## Actions performed
 

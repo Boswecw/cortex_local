@@ -30,12 +30,14 @@ BASE_RUNTIME_SLICE_SPECS = (
     ("slice2_extraction_emission", "cortex_runtime.extraction_emission"),
     ("slice3_retrieval_package_emission", "cortex_runtime.retrieval_package_emission"),
     ("slice4_service_status_truth", "cortex_runtime.service_status"),
+    ("slice10_scrivener_stage1_authority_recon", "cortex_runtime.scrivener_authority_recon"),
 )
 BASE_RUNTIME_SLICE_LABELS = {
     "slice1_intake_validation": "intake validation",
     "slice2_extraction_emission": "syntax-only extraction emission",
     "slice3_retrieval_package_emission": "governed retrieval-package emission",
     "slice4_service_status_truth": "service-status truth",
+    "slice10_scrivener_stage1_authority_recon": "Scrivener Stage 1 authority recon",
 }
 RUNTIME_SLICE_LABELS = {**BASE_RUNTIME_SLICE_LABELS, **SOURCE_LANE_SLICE_LABELS}
 
@@ -206,16 +208,18 @@ def _status_candidate() -> dict[str, Any]:
 
     summary = (
         "Bounded runtime slices are implemented for intake, extraction, retrieval-package, service-status, "
-        "and admitted source lanes: "
-        + _source_lane_label_list(admitted_source_lanes)
-        + "."
+        "and all admitted source lanes."
     )
+    if "slice10_scrivener_stage1_authority_recon" in implemented_slices:
+        summary += " Special-track Scrivener Stage 1 authority recon is also implemented as a bounded status-only runtime slice."
     message = (
         "Cortex is ready for bounded intake, syntax-only extraction, retrieval-package, "
         "and service-status runtime paths on "
         + _source_lane_label_list(admitted_source_lanes)
         + "."
     )
+    if "slice10_scrivener_stage1_authority_recon" in implemented_slices:
+        message += " Scrivener remains unadmitted; only bounded Stage 1 authority recon is implemented."
     return _build_status(
         state="ready",
         readiness_class="ready",

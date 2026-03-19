@@ -30,17 +30,23 @@ class ServiceStatusRuntimeTests(unittest.TestCase):
             "slice2_extraction_emission",
             "slice3_retrieval_package_emission",
             "slice4_service_status_truth",
-            "slice6_docx_source_lane",
-            "slice7_rtf_source_lane",
-            "slice8_odt_source_lane",
-            "slice9_epub_source_lane",
+            "slice10_scrivener_stage1_authority_recon",
         ]
+        if pdf_lane_runtime_available():
+            expected_slices.append("slice5_pdf_source_lane")
+        expected_slices.extend(
+            [
+                "slice6_docx_source_lane",
+                "slice7_rtf_source_lane",
+                "slice8_odt_source_lane",
+                "slice9_epub_source_lane",
+            ]
+        )
         expected_lanes = [
             "local_file_markdown",
             "local_file_plain_text",
         ]
         if pdf_lane_runtime_available():
-            expected_slices.insert(4, "slice5_pdf_source_lane")
             expected_lanes.append("local_file_pdf_text")
         expected_lanes.append("local_file_docx_text")
         expected_lanes.append("local_file_rtf_text")
@@ -52,6 +58,8 @@ class ServiceStatusRuntimeTests(unittest.TestCase):
         )
         self.assertEqual(result["runtime_surface_summary"]["admitted_source_lanes"], expected_lanes)
         self.assertEqual(result["watcher_summary"]["active_watch_scope_count"], 0)
+        self.assertIn("Stage 1 authority recon", result["readiness_summary"]["summary"])
+        self.assertIn("Scrivener remains unadmitted", result["operator_visible_message"])
 
     def test_degraded_status_is_reported_when_runtime_slice_is_missing(self) -> None:
         with patch(

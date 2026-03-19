@@ -1,0 +1,43 @@
+{
+  "artifact_id": "scriv-recon-1234567890abcdef",
+  "request_id": "scriv-stage1-002",
+  "source_ref": "scriv-local",
+  "state": "denied",
+  "observation_boundary": "status_only",
+  "semantic_boundary_enforced": true,
+  "authority_status": {
+    "state": "not_attempted",
+    "candidate_count": 0,
+    "candidate_paths": [],
+    "operator_visible_summary": "Authority recon was not attempted."
+  },
+  "package_status": {
+    "state": "not_attempted",
+    "data_root_present": false,
+    "operator_visible_summary": "Package observation was not attempted."
+  },
+  "mapping_status": {
+    "state": "not_attempted",
+    "mirrored_uuid_count": 0,
+    "binder_only_uuid_count": 0,
+    "data_only_uuid_count": 0,
+    "direct_missing_content_target_count": 0,
+    "operator_visible_summary": "Mapping observation was not attempted."
+  },
+  "observed_role_surfaces": [],
+  "observed_binder_summary": {
+    "binder_item_count": 0,
+    "top_level_binder_item_count": 0,
+    "max_binder_depth": 0
+  },
+  "provenance": {
+    "source_hash": "sha256:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+    "observer_version": "slice10.scrivener_stage1.1",
+    "source_modified_at": "2026-03-19T00:00:00Z",
+    "byte_count": 0,
+    "source_lane_candidate": "scrivener_project",
+    "project_container_path": "/tmp/not-a-project",
+    "authority_basis": "not_attempted"
+  },
+  "observed_at": "2026-03-19T00:00:00Z"
+}

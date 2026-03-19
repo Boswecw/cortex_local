@@ -44,6 +44,9 @@ It carries only bounded local runtime truth:
 It is allowed to report only the runtime slices Cortex actually implements and the governed source lanes it actually admits.
 It is not allowed to imply unbounded source support, future capability promises, or broader platform reach.
 
+Special-track runtime slices that are implemented without lane admission may appear in `implemented_slices` only.
+They must not be silently promoted into `admitted_source_lanes`.
+
 Source-lane reporting must remain explicit.
 If a bounded local text-layer PDF lane is admitted, it must be reported as such rather than implied through a generic "document" capability claim.
 If a bounded local DOCX lane is admitted, it must also be reported explicitly rather than folded into a generic office-document claim.

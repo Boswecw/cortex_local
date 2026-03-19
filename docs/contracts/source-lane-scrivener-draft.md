@@ -1,6 +1,6 @@
 # Cortex Source Lane Draft - Scrivener
 
-Governance note only. This draft defines planning posture and does not authorize implementation by itself.
+Governance note only. This draft defines later Scrivener admission posture and does not authorize implementation by itself.
 
 ## Status
 
@@ -15,12 +15,25 @@ This draft therefore treats Scrivener as a special-track bounded local project-s
 
 It does not authorize implementation by itself.
 
-If governance later authorizes a bounded first build slice, Stage 1 should start from:
+Decision 0015 now authorizes a bounded first build slice for Stage 1 authority recon only.
+
+That Stage 1 work must start from:
 
 - `docs/contracts/scrivener-authority-recon-status-draft.md`
+- `docs/source-lanes/scrivener/authority-recon-status-semantics.md`
+- `docs/source-lanes/scrivener/authority-recon-correspondence-semantics.md`
 - `docs/source-lanes/scrivener/authority-recon-slice-plan.md`
 
-Those artifacts are conditional build inputs only.
+Those artifacts are authorized build inputs for Stage 1 only.
+
+This draft still does not authorize extraction or lane admission.
+
+The next governance layer after Stage 1 is now defined in:
+
+- `docs/source-lanes/scrivener/stage2-planning-packet.md`
+
+That packet opens Stage 2 planning only.
+It does not authorize Stage 2 implementation.
 
 ## 1. Lane identity
 
@@ -116,6 +129,7 @@ Candidate unavailable cases:
 - unreadable or incomplete project container
 - missing authoritative project index or binder truth
 - malformed project metadata or item references
+- readable authority with incomplete correspondence that prevents truthful structural availability claims
 - binder or manuscript truth too broken to establish an admitted textual path honestly
 
 Unavailable conditions must be distinguished cleanly from denied conditions.
