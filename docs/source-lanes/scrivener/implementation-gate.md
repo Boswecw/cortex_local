@@ -12,11 +12,11 @@ Blocked pending unresolved authority and deterministic mapping ambiguity.
 
 | Gate area | Current result | Blocking reason |
 | --- | --- | --- |
-| fixture packet | partial | four active evidence packets now exist in the canonical intake surface across ambiguous, positive, and negative classes, plus one retained superseded raw-derived audit packet, but coverage is still narrow and there is no compat packet |
-| structural authority | partial | three fixtures show `.scriv` plus `.scrivx` co-presence, the same-source clean baseline and the positive mixed-structure fixture expose draft/research/trash/template/bookmark surfaces, and the sanitized-derived negative packet shows malformed `.scrivx` must fail closed, but sole-authority and sufficiency claims remain unresolved |
+| fixture packet | partial | five active evidence packets now exist in the canonical intake surface across ambiguous, positive, and negative classes, plus one retained superseded raw-derived audit packet, but coverage is still narrow and there is no compat packet |
+| structural authority | partial | three fixtures show `.scriv` plus `.scrivx` co-presence, the same-source clean baseline and the positive mixed-structure fixture expose draft/research/trash/template/bookmark surfaces, one sanitized-derived negative packet shows malformed `.scrivx` must fail closed, and another shows readable `.scrivx` can coexist with missing expected `content.rtf`, but sole-authority and sufficiency claims remain unresolved |
 | node admission policy | partial | mixed draft and research structure is now observable, but no safe admission rule exists yet for admissible subtree selection or non-manuscript exclusion |
 | content mapping proof | partial | the same-source clean baseline and the second positive fixture show multiple `BinderItem UUID` values mirrored under `Files/Data/<UUID>/...`, but deterministic mapping across all item types is unproven |
-| negative or irregular coverage | partial | one sanitized-derived intentionally corrupted-authority negative packet now exists with a clean same-source baseline, but irregular breadth is still narrow and missing-content or partial-package cases are still absent |
+| negative or irregular coverage | partial | two sanitized-derived negative packets now exist, one corrupted-authority and one readable-authority missing-content case, but irregular breadth is still narrow and partial-package or missing-auxiliary cases are still absent |
 | compatibility coverage | failed | no version-drift or compatibility-oriented fixture exists |
 | bounded RTF dependency decision | unresolved | the positive and ambiguous fixtures show heavy text-side `content.rtf` storage with notes, synopsis, and style sidecars, but dependency posture cannot be fixed from the current evidence packet alone |
 
@@ -25,8 +25,8 @@ Blocked pending unresolved authority and deterministic mapping ambiguity.
 The next allowed actions are:
 
 1. acquire a compatibility-oriented or newer-version fixture
-2. acquire broader irregular coverage such as missing-content or partial-package failure cases
-3. continue read-only comparison across the current active four-packet evidence surface
+2. acquire broader irregular coverage beyond the current corrupted-authority and missing-content cases, such as partial-package or missing-auxiliary failure cases
+3. continue read-only comparison across the current active five-packet evidence surface
 4. re-run the implementation gate
 
 ## What may not happen next
@@ -67,6 +67,7 @@ Current evidence artifacts:
 
 - `fixtures/scrivener/ambiguous/scriv-sanitized-fixture-v1/`
 - `fixtures/scrivener/negative/faith-in-a-firestorm-sanitized-corrupt-scrivx-negative-fixture/`
+- `fixtures/scrivener/negative/the-heart-of-the-storm-sanitized-missing-content-negative-fixture/`
 - `fixtures/scrivener/positive/faith-in-a-firestorm-sanitized-v1/`
 - `fixtures/scrivener/positive/scriv-mixed-structure-sanitized-v1/`
 
@@ -77,6 +78,10 @@ Retained superseded audit packet:
 The `faith-in-a-firestorm` clean baseline and canonical negative packet now form an explicit same-source pair.
 
 The canonical negative packet strengthens fail-closed malformed-authority evidence while preserving sanitized-derivative provenance.
+
+The `scriv-sanitized-fixture-v1` baseline and `the-heart-of-the-storm-sanitized-missing-content-negative-fixture` packet now form an explicit same-source clean-vs-missing-content pair.
+
+That pair strengthens readable-authority but missing-content evidence without changing the blocked verdict.
 
 The earlier raw-derived negative packet is retained only as superseded provenance history.
 

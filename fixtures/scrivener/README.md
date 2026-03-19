@@ -24,6 +24,7 @@ Fixtures in this directory may be used for:
 - admission-policy validation
 - compatibility characterization
 - same-source clean vs malformed-authority comparison when provenance is explicit
+- same-source clean vs missing-content comparison when provenance is explicit
 - future contract tests after explicit lane admission
 
 Fixtures in this directory may not be used to justify:
@@ -131,6 +132,7 @@ If Scrivener is admitted later, these fixtures may be promoted into contract tes
 - admission decisions
 - content-location correctness
 - denied and unsupported diagnostics
+- missing-content fail-closed behavior
 - malformed-structure fail-closed behavior
 
 Until then, they remain evidence assets only.
