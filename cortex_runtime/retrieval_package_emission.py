@@ -436,6 +436,11 @@ def _build_parser() -> argparse.ArgumentParser:
         default=None,
         help="Source reference to use with --source-path. Defaults to the file name.",
     )
+    parser.add_argument(
+        "--media-type",
+        default=None,
+        help="Declared media type to apply to --source-path lane admission. Ignored when --input is used.",
+    )
     return parser
 
 
@@ -453,6 +458,7 @@ def main(argv: list[str] | None = None) -> int:
             source_path=args.source_path,
             request_id=args.request_id,
             source_ref=args.source_ref,
+            media_type=args.media_type,
         )
 
     print(json.dumps(result, indent=2, sort_keys=True))

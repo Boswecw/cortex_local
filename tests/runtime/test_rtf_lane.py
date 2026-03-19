@@ -15,6 +15,7 @@ from tests.runtime.runtime_test_support import (
 
 
 RTF_READY_FIXTURE = ROOT / "tests/runtime/fixtures/sample-note.rtf"
+RTF_ESCAPED_FIXTURE = ROOT / "tests/runtime/fixtures/sample-note-escaped.rtf"
 RTF_ANNOTATED_FIXTURE = ROOT / "tests/runtime/fixtures/sample-note-annotated.rtf"
 RTF_CORRUPT_FIXTURE = ROOT / "tests/runtime/fixtures/sample-note-corrupt.rtf"
 
@@ -64,6 +65,21 @@ class RtfLaneRuntimeTests(unittest.TestCase):
         assert_schema_valid(self, result, schema_name="extraction-result.schema.json")
         self.assertEqual(result["state"], "denied")
         self.assertEqual(result["refusal"]["reason_class"], "unsupported_source_type")
+
+    def test_escaped_rtf_recovers_bounded_literal_text(self) -> None:
+        result = emit_extraction_result_from_source_file(
+            RTF_ESCAPED_FIXTURE,
+            request_id="rtf-escaped-001",
+            source_ref="rtf-escaped",
+            media_type="application/rtf",
+        )
+
+        assert_schema_valid(self, result, schema_name="extraction-result.schema.json")
+        self.assertEqual(result["state"], "ready")
+        block_texts = [block["text"] for block in result["structures"]["content_blocks"]]
+        self.assertIn("Cafe au lait", block_texts[0])
+        self.assertIn("Snowman", block_texts[1])
+        self.assertEqual({block["block_kind"] for block in result["structures"]["content_blocks"]}, {"paragraph"})
 
     def test_corrupt_rtf_is_unavailable(self) -> None:
         result = emit_extraction_result_from_source_file(

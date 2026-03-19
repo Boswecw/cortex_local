@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import copy
+import tempfile
 import unittest
+import zipfile
 from pathlib import Path
 
 from cortex_runtime.extraction_emission import emit_extraction_result_from_intake_payload
@@ -25,6 +27,13 @@ def build_docx_intake_payload(path: Path) -> dict[str, object]:
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         )
     )
+
+
+def write_docx(path: Path, document_xml: str, *, comments_xml: str | None = None) -> None:
+    with zipfile.ZipFile(path, "w") as archive:
+        archive.writestr("word/document.xml", document_xml)
+        if comments_xml is not None:
+            archive.writestr("word/comments.xml", comments_xml)
 
 
 class DocxLaneRuntimeTests(unittest.TestCase):
@@ -83,6 +92,76 @@ class DocxLaneRuntimeTests(unittest.TestCase):
         assert_schema_valid(self, result, schema_name="extraction-result.schema.json")
         self.assertEqual(result["state"], "unavailable")
         self.assertEqual(result["refusal"]["reason_class"], "dependency_unavailable")
+
+    def test_non_heading_styles_are_not_promoted_to_sections(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            source_path = Path(tmpdir) / "style-only.docx"
+            write_docx(
+                source_path,
+                """
+                <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+                  <w:body>
+                    <w:p>
+                      <w:pPr><w:pStyle w:val="TitleLike"/></w:pPr>
+                      <w:r><w:t>Not a heading</w:t></w:r>
+                    </w:p>
+                    <w:p><w:r><w:t>Body paragraph.</w:t></w:r></w:p>
+                  </w:body>
+                </w:document>
+                """,
+            )
+
+            result = emit_extraction_result_from_source_file(
+                source_path,
+                request_id="docx-style-001",
+                source_ref="docx-style",
+                media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            )
+
+        assert_schema_valid(self, result, schema_name="extraction-result.schema.json")
+        self.assertEqual(result["state"], "ready")
+        self.assertNotIn("sections", result["structures"])
+        self.assertEqual(
+            [block["block_kind"] for block in result["structures"]["content_blocks"]],
+            ["paragraph", "paragraph"],
+        )
+
+    def test_nested_docx_table_is_denied(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            source_path = Path(tmpdir) / "nested-table.docx"
+            write_docx(
+                source_path,
+                """
+                <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+                  <w:body>
+                    <w:tbl>
+                      <w:tr>
+                        <w:tc>
+                          <w:tbl>
+                            <w:tr>
+                              <w:tc>
+                                <w:p><w:r><w:t>Nested</w:t></w:r></w:p>
+                              </w:tc>
+                            </w:tr>
+                          </w:tbl>
+                        </w:tc>
+                      </w:tr>
+                    </w:tbl>
+                  </w:body>
+                </w:document>
+                """,
+            )
+
+            result = emit_extraction_result_from_source_file(
+                source_path,
+                request_id="docx-nested-001",
+                source_ref="docx-nested",
+                media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            )
+
+        assert_schema_valid(self, result, schema_name="extraction-result.schema.json")
+        self.assertEqual(result["state"], "denied")
+        self.assertEqual(result["refusal"]["reason_class"], "ineligible_source")
 
     def test_ready_docx_extraction_is_retrieval_compatible(self) -> None:
         result = emit_retrieval_package_from_source_file(

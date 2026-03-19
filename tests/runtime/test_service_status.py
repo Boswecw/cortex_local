@@ -79,6 +79,20 @@ class ServiceStatusRuntimeTests(unittest.TestCase):
         self.assertEqual(result["state"], "unavailable")
         self.assertEqual(result["runtime_surface_summary"]["admitted_source_lanes"], [])
 
+    def test_unavailable_status_is_reported_when_registry_exceeds_bounded_vocabulary(self) -> None:
+        with patch(
+            "cortex_runtime.service_status._admitted_source_lanes",
+            return_value=(
+                [],
+                "Cortex source-lane truth is unavailable because extraction support exceeds the bounded service-status vocabulary.",
+            ),
+        ):
+            result = emit_service_status()
+
+        assert_schema_valid(self, result, schema_name="service-status.schema.json")
+        self.assertEqual(result["state"], "unavailable")
+        self.assertIn("bounded service-status vocabulary", result["operator_visible_message"])
+
     def test_output_remains_informational_only(self) -> None:
         result = emit_service_status()
 

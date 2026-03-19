@@ -1,10 +1,8 @@
 from __future__ import annotations
 
 import copy
-import io
 import json
 import unittest
-from contextlib import redirect_stdout
 from pathlib import Path
 
 from cortex_runtime.intake_validation import (
@@ -13,6 +11,7 @@ from cortex_runtime.intake_validation import (
     validate_intake_json_text,
     validate_intake_payload,
 )
+from tests.runtime.runtime_test_support import capture_cli_result
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -93,11 +92,7 @@ class IntakeValidationRuntimeTests(unittest.TestCase):
         self.assertEqual(result.errors[0].message, "payload is not valid JSON")
 
     def test_file_entrypoint_emits_bounded_json_result(self) -> None:
-        output = io.StringIO()
-        with redirect_stdout(output):
-            exit_code = main([str(VALID_INTAKE_FIXTURE)])
-
-        payload = json.loads(output.getvalue())
+        exit_code, payload = capture_cli_result(main, [str(VALID_INTAKE_FIXTURE)])
         self.assertEqual(exit_code, 0)
         self.assertTrue(payload["accepted"])
         self.assertEqual(payload["validation_state"], "accepted")
@@ -121,6 +116,16 @@ class IntakeValidationRuntimeTests(unittest.TestCase):
         self.assertEqual(result.validation_state, "denied")
         self.assertEqual(result.error_count, 1)
         self.assertEqual(result.errors[0].message, "payload could not be read")
+
+    def test_cli_unreadable_file_fails_closed(self) -> None:
+        exit_code, payload = capture_cli_result(
+            main,
+            [str(ROOT / "tests/contracts/fixtures/invalid/not-present.json")],
+        )
+        self.assertEqual(exit_code, 1)
+        self.assertFalse(payload["accepted"])
+        self.assertEqual(payload["validation_state"], "denied")
+        self.assertEqual(payload["errors"][0]["message"], "payload could not be read")
 
 
 if __name__ == "__main__":

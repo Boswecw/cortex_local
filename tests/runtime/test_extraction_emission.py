@@ -1,11 +1,7 @@
 from __future__ import annotations
 
 import copy
-import io
-import json
 import unittest
-from contextlib import redirect_stdout
-from pathlib import Path
 
 from cortex_runtime.extraction_emission import (
     emit_extraction_result_from_intake_json_text,
@@ -17,12 +13,14 @@ from tests.runtime.runtime_test_support import (
     ROOT,
     assert_schema_valid,
     build_file_intake_payload,
+    capture_cli_result,
     load_json,
 )
 
 VALID_INTAKE_FIXTURE = ROOT / "tests/contracts/fixtures/valid/intake-request-file-basic.json"
 INVALID_INTAKE_FIXTURE = ROOT / "tests/contracts/fixtures/invalid/intake-request-watcher-not-visible.json"
 SUPPORTED_SOURCE_FIXTURE = ROOT / "tests/runtime/fixtures/sample-note.md"
+EMPTY_TEXT_FIXTURE = ROOT / "tests/runtime/fixtures/sample-empty.txt"
 UNSUPPORTED_SOURCE_FIXTURE = ROOT / "tests/runtime/fixtures/sample-unsupported.bin"
 
 
@@ -52,6 +50,18 @@ class ExtractionEmissionRuntimeTests(unittest.TestCase):
         assert_schema_valid(self, result, schema_name="extraction-result.schema.json")
         self.assertEqual(result["state"], "ready")
         self.assertEqual(result["source_ref"], "src-direct")
+
+    def test_empty_text_source_is_denied(self) -> None:
+        result = emit_extraction_result_from_source_file(
+            EMPTY_TEXT_FIXTURE,
+            request_id="empty-text-001",
+            source_ref="empty-text",
+            media_type="text/plain",
+        )
+
+        assert_schema_valid(self, result, schema_name="extraction-result.schema.json")
+        self.assertEqual(result["state"], "denied")
+        self.assertEqual(result["refusal"]["reason_class"], "unsupported_source_type")
 
     def test_output_remains_syntax_only_and_bounded(self) -> None:
         result = emit_extraction_result_from_intake_payload(build_supported_intake_payload())
@@ -102,23 +112,60 @@ class ExtractionEmissionRuntimeTests(unittest.TestCase):
         self.assertEqual(result["refusal"]["reason_class"], "ineligible_source")
 
     def test_cli_entrypoint_emits_ready_json_for_direct_source(self) -> None:
-        output = io.StringIO()
-        with redirect_stdout(output):
-            exit_code = main(
-                [
-                    "--source-path",
-                    str(SUPPORTED_SOURCE_FIXTURE),
-                    "--request-id",
-                    "cli-001",
-                    "--source-ref",
-                    "src-cli",
-                ]
-            )
-
-        result = json.loads(output.getvalue())
+        exit_code, result = capture_cli_result(
+            main,
+            [
+                "--source-path",
+                str(SUPPORTED_SOURCE_FIXTURE),
+                "--request-id",
+                "cli-001",
+                "--source-ref",
+                "src-cli",
+                "--media-type",
+                "text/markdown",
+            ],
+        )
         assert_schema_valid(self, result, schema_name="extraction-result.schema.json")
         self.assertEqual(exit_code, 0)
         self.assertEqual(result["state"], "ready")
+
+    def test_cli_media_type_mismatch_fails_closed(self) -> None:
+        exit_code, result = capture_cli_result(
+            main,
+            [
+                "--source-path",
+                str(SUPPORTED_SOURCE_FIXTURE),
+                "--request-id",
+                "cli-mismatch-001",
+                "--source-ref",
+                "src-cli-mismatch",
+                "--media-type",
+                "application/octet-stream",
+            ],
+        )
+
+        assert_schema_valid(self, result, schema_name="extraction-result.schema.json")
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(result["state"], "denied")
+        self.assertEqual(result["refusal"]["reason_class"], "unsupported_source_type")
+
+    def test_cli_unreadable_source_fails_closed(self) -> None:
+        exit_code, result = capture_cli_result(
+            main,
+            [
+                "--source-path",
+                str(ROOT / "tests/runtime/fixtures/not-present.md"),
+                "--request-id",
+                "cli-missing-001",
+                "--source-ref",
+                "src-cli-missing",
+            ],
+        )
+
+        assert_schema_valid(self, result, schema_name="extraction-result.schema.json")
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(result["state"], "unavailable")
+        self.assertEqual(result["refusal"]["reason_class"], "dependency_unavailable")
 
 
 if __name__ == "__main__":

@@ -21,3 +21,13 @@ Current admitted lanes:
 
 Lane-specific rules remain in `docs/contracts/source-lane-*.md`.
 Shared lane rules live in this directory so future lane admission does not become a series of one-off branches.
+
+Governance references in this directory:
+
+- `lane-admission-criteria.md`
+- `shared-failure-taxonomy.md`
+- `shared-provenance-model.md`
+- `lane-admission-playbook.md`
+- `contract-symmetry-audit.md`
+- `next-lane-candidate-matrix.md`
+- `odt-admission-draft.md`

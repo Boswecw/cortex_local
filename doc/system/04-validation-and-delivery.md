@@ -116,6 +116,27 @@ It adds:
 - retrieval-package compatibility for ready RTF extraction outputs through the existing deterministic paragraph path
 - focused runtime tests for ready, denied, unavailable, deterministic, retrieval-compatible, and cross-lane invariant behavior
 
+## Post-slice-7 hardening delivered
+
+The current hardening pass adds:
+
+- an explicit text-lane contract so `.md` and `.txt` no longer rely on implicit runtime truth alone
+- a contract-symmetry audit note covering schemas, lane docs, ADRs, service-status truth, and retrieval truth
+- deeper ugly-case runtime coverage for empty text inputs, CRLF text normalization, PDF tooling anomalies, DOCX structural edge cases, and RTF escape-path recovery
+- direct-source CLI media-type support so suffix and media-type mismatch behavior is visible through operator entrypoints
+- a formal lane-admission playbook for future format evaluation without format-momentum drift
+
+## Next-lane evaluation delivered
+
+The current governance phase adds:
+
+- a formal candidate comparison across ODT, HTML, EPUB, and Scrivener
+- an explicit recommendation of ODT as the next candidate target only
+- a selection ADR recording why HTML and EPUB were deferred and why Scrivener remains a special project-source candidate
+- a draft ODT admission posture without admitting or implementing the lane yet
+
+This phase does not add runtime behavior, schema changes, or a new admitted lane.
+
 ## Delivery order
 
 The current delivery order remains:
@@ -149,8 +170,10 @@ The current remediation pass adds:
 The repo is currently strongest where constitutional claims are backed by schemas, invalid fixtures, and validator guard checks.
 
 Slices 1 through 7 now form the current bounded runtime baseline.
+This baseline has also been hardened for contract symmetry, operator consistency, and future lane-admission governance.
+The next lane has now been selected by governance only, not by implementation.
 No further implementation target is implied by this system reference alone.
-Any next step should be explicit, narrow, and anchored to the governing plan rather than inferred from momentum.
+Any future ODT work must still be explicit, narrow, and anchored to the governing plan rather than inferred from selection momentum alone.
 
 This assembled system doc is therefore a control reference, not a product or roadmap document.
 

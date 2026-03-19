@@ -1,9 +1,6 @@
 from __future__ import annotations
 
-import io
-import json
 import unittest
-from contextlib import redirect_stdout
 
 from cortex_runtime.extraction_emission import emit_extraction_result_from_source_file, pdf_lane_runtime_available
 from cortex_runtime.retrieval_package_emission import (
@@ -12,7 +9,7 @@ from cortex_runtime.retrieval_package_emission import (
     emit_retrieval_package_from_source_file,
     main,
 )
-from tests.runtime.runtime_test_support import ROOT, assert_schema_valid, load_json
+from tests.runtime.runtime_test_support import ROOT, assert_schema_valid, capture_cli_result, load_json
 
 SUPPORTED_SOURCE_FIXTURE = ROOT / "tests/runtime/fixtures/sample-note.md"
 UNSUPPORTED_SOURCE_FIXTURE = ROOT / "tests/runtime/fixtures/sample-unsupported.bin"
@@ -126,20 +123,19 @@ class RetrievalPackageEmissionRuntimeTests(unittest.TestCase):
         self.assertEqual({chunk["structure_kind"] for chunk in result["chunks"]}, {"section"})
 
     def test_cli_entrypoint_emits_ready_json_for_direct_source(self) -> None:
-        output = io.StringIO()
-        with redirect_stdout(output):
-            exit_code = main(
-                [
-                    "--source-path",
-                    str(SUPPORTED_SOURCE_FIXTURE),
-                    "--request-id",
-                    "slice3-cli",
-                    "--source-ref",
-                    "src-cli",
-                ]
-            )
-
-        result = json.loads(output.getvalue())
+        exit_code, result = capture_cli_result(
+            main,
+            [
+                "--source-path",
+                str(SUPPORTED_SOURCE_FIXTURE),
+                "--request-id",
+                "slice3-cli",
+                "--source-ref",
+                "src-cli",
+                "--media-type",
+                "text/markdown",
+            ],
+        )
         assert_schema_valid(self, result, schema_name="retrieval-package.schema.json")
         self.assertEqual(exit_code, 0)
         self.assertEqual(result["state"], "ready")
@@ -148,6 +144,44 @@ class RetrievalPackageEmissionRuntimeTests(unittest.TestCase):
         result = emit_retrieval_package_from_extraction_json_text("{")
 
         assert_schema_valid(self, result, schema_name="retrieval-package.schema.json")
+        self.assertEqual(result["state"], "denied")
+        self.assertEqual(result["refusal"]["reason_class"], "unsupported_route")
+
+    def test_cli_media_type_mismatch_is_denied(self) -> None:
+        exit_code, result = capture_cli_result(
+            main,
+            [
+                "--source-path",
+                str(SUPPORTED_SOURCE_FIXTURE),
+                "--request-id",
+                "slice3-cli-mismatch",
+                "--source-ref",
+                "src-cli-mismatch",
+                "--media-type",
+                "application/octet-stream",
+            ],
+        )
+
+        assert_schema_valid(self, result, schema_name="retrieval-package.schema.json")
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(result["state"], "denied")
+        self.assertEqual(result["refusal"]["reason_class"], "unsupported_route")
+
+    def test_cli_unreadable_source_is_denied(self) -> None:
+        exit_code, result = capture_cli_result(
+            main,
+            [
+                "--source-path",
+                str(ROOT / "tests/runtime/fixtures/not-present.md"),
+                "--request-id",
+                "slice3-cli-missing",
+                "--source-ref",
+                "src-cli-missing",
+            ],
+        )
+
+        assert_schema_valid(self, result, schema_name="retrieval-package.schema.json")
+        self.assertEqual(exit_code, 1)
         self.assertEqual(result["state"], "denied")
         self.assertEqual(result["refusal"]["reason_class"], "unsupported_route")
 

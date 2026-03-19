@@ -26,6 +26,8 @@ Each admitted lane must declare:
 - literal structures that may be emitted
 - structures or behaviors that are explicitly excluded
 
+Future lane work must also pass the reusable evaluation checklist in `docs/source-lanes/lane-admission-playbook.md` before implementation begins.
+
 ## Non-admission rule
 
 Do not admit a lane if honest contract truth would require:

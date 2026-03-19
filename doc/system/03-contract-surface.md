@@ -34,6 +34,7 @@ They must expose:
 
 Runtime Slice 2 now emits bounded extraction-result outputs for supported local `.md` and `.txt` sources only.
 Unsupported, unreadable, malformed, or intake-invalid inputs fail closed through `denied` or `unavailable` extraction results.
+Empty text-like sources are now denied rather than treated as empty success outputs.
 
 Runtime Slice 5 adds one bounded local PDF lane only.
 That lane admits text-layer `.pdf` files, remains text-only and non-OCR, allows `ready` only for trustworthy extractable text, allows `partial_success` only when some pages lack extractable text, denies encrypted or text-layer-free PDFs, and marks corrupt or unreadable PDFs unavailable.
@@ -43,6 +44,7 @@ Runtime Slice 6 adds one bounded local DOCX lane only.
 That lane admits local `.docx` packages, remains syntax-only, recovers headings only from explicit paragraph-style evidence, recovers simple lists and bounded table text only when deterministic, denies comments or tracked changes, and marks corrupt or unreadable packages unavailable.
 Runtime Slice 7 adds one bounded local RTF lane only.
 That lane admits local `.rtf` files, remains paragraph-only, supports basic escaped character recovery only as needed for honest plain-text extraction, denies annotation, review, field, media, and other rich destinations outside the lane, and marks corrupt or syntactically untrustworthy sources unavailable.
+The text baseline is now documented explicitly alongside the richer lanes rather than remaining only an implicit runtime truth surface.
 
 ## Retrieval package
 
@@ -78,6 +80,7 @@ It does not become a raw-content channel or downstream coordination surface.
 Runtime Slice 4 now emits one governed service-status path from bounded local runtime truth only.
 It reports implemented runtime slices, admitted source lanes, zero active watcher scopes, and ready/degraded/unavailable posture without adding recommendation or control-plane behavior.
 The admitted-source-lane report is now driven from the shared lane registry rather than ad hoc extraction-module inspection.
+Future lane work is now expected to pass a reusable admission playbook before implementation begins.
 
 ## Handoff envelope
 
@@ -137,6 +140,7 @@ This section is grounded in:
 
 - `docs/contracts/intake-request.md`
 - `docs/contracts/extraction-result.md`
+- `docs/contracts/source-lane-text.md`
 - `docs/contracts/source-lane-docx.md`
 - `docs/contracts/source-lane-pdf.md`
 - `docs/contracts/source-lane-rtf.md`
@@ -145,3 +149,5 @@ This section is grounded in:
 - `docs/contracts/service-status.md`
 - `docs/contracts/embedded-diagnostics.md`
 - `docs/source-lanes/README.md`
+- `docs/source-lanes/contract-symmetry-audit.md`
+- `docs/source-lanes/lane-admission-playbook.md`

@@ -945,6 +945,18 @@ def _emit_text_extraction_result(
             byte_count=byte_count,
         )
 
+    if not structures["content_blocks"]:
+        return _emit_failure_result(
+            request_id=request_id,
+            source_ref=source_ref,
+            state="denied",
+            reason_class="unsupported_source_type",
+            summary="Extraction is denied because the text source has no bounded extractable text structures.",
+            source_hash=source_hash,
+            source_modified_at=source_modified_at,
+            byte_count=byte_count,
+        )
+
     return _emit_success_result(
         request_id=request_id,
         source_ref=source_ref,
@@ -1264,6 +1276,11 @@ def _build_parser() -> argparse.ArgumentParser:
         default=None,
         help="Source reference to use with --source-path. Defaults to the file name.",
     )
+    parser.add_argument(
+        "--media-type",
+        default=None,
+        help="Declared media type to apply to --source-path lane admission. Ignored when --input is used.",
+    )
     return parser
 
 
@@ -1281,6 +1298,7 @@ def main(argv: list[str] | None = None) -> int:
             source_path=args.source_path,
             request_id=args.request_id,
             source_ref=args.source_ref,
+            media_type=args.media_type,
         )
 
     print(json.dumps(result, indent=2, sort_keys=True))

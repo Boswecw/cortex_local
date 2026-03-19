@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from cortex_runtime.extraction_emission import (
     emit_extraction_result_from_intake_payload,
@@ -103,6 +104,70 @@ class PdfLaneRuntimeTests(unittest.TestCase):
             source_ref="pdf-corrupt",
             media_type="application/pdf",
         )
+
+        assert_schema_valid(self, result, schema_name="extraction-result.schema.json")
+        self.assertEqual(result["state"], "unavailable")
+        self.assertEqual(result["refusal"]["reason_class"], "dependency_unavailable")
+
+    def test_pdfinfo_page_count_anomaly_is_unavailable(self) -> None:
+        with patch("cortex_runtime.source_lanes.source_lane_slice_available", return_value=True), patch(
+            "cortex_runtime.extraction_emission.pdf_lane_runtime_available",
+            return_value=True,
+        ), patch(
+            "cortex_runtime.extraction_emission.subprocess.run",
+            return_value=type(
+                "CompletedProcess",
+                (),
+                {
+                    "returncode": 0,
+                    "stdout": "Pages: not-a-number\nEncrypted: no\n",
+                    "stderr": "",
+                },
+            )(),
+        ):
+            result = emit_extraction_result_from_source_file(
+                PDF_TEXT_FIXTURE,
+                request_id="pdf-anomaly-001",
+                source_ref="pdf-anomaly",
+                media_type="application/pdf",
+            )
+
+        assert_schema_valid(self, result, schema_name="extraction-result.schema.json")
+        self.assertEqual(result["state"], "unavailable")
+        self.assertEqual(result["refusal"]["reason_class"], "dependency_unavailable")
+
+    def test_pdftotext_anomaly_is_unavailable(self) -> None:
+        def run_side_effect(command: list[str], **_kwargs: object) -> object:
+            if command[0] == "pdfinfo":
+                return type(
+                    "CompletedProcess",
+                    (),
+                    {
+                        "returncode": 0,
+                        "stdout": "Pages: 1\nEncrypted: no\n",
+                        "stderr": "",
+                    },
+                )()
+            return type(
+                "CompletedProcess",
+                (),
+                {
+                    "returncode": 1,
+                    "stdout": "",
+                    "stderr": "syntax error in xref table",
+                },
+            )()
+
+        with patch("cortex_runtime.source_lanes.source_lane_slice_available", return_value=True), patch(
+            "cortex_runtime.extraction_emission.pdf_lane_runtime_available",
+            return_value=True,
+        ), patch("cortex_runtime.extraction_emission.subprocess.run", side_effect=run_side_effect):
+            result = emit_extraction_result_from_source_file(
+                PDF_TEXT_FIXTURE,
+                request_id="pdf-anomaly-002",
+                source_ref="pdf-anomaly-2",
+                media_type="application/pdf",
+            )
 
         assert_schema_valid(self, result, schema_name="extraction-result.schema.json")
         self.assertEqual(result["state"], "unavailable")
