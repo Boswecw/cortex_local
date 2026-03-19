@@ -4,7 +4,7 @@
 
 `Stage 1 authority recon`: authorized and implemented.
 
-`Scrivener lane admission, extraction, and any implementation beyond Stage 1`: blocked pending compatibility coverage and remaining authority, policy, and deterministic-mapping proof.
+`Scrivener lane admission, extraction, and any implementation beyond Stage 1`: blocked under `DECISIONS/0016-scrivener-stage2-implementation-remains-blocked.md` pending compatibility coverage and remaining authority, policy, deterministic-mapping, degraded-truth, and dependency proof.
 
 ## Why broader implementation is still blocked
 
@@ -22,7 +22,7 @@
 
 The next allowed actions are:
 
-1. continue Stage 2 planning only under `docs/source-lanes/scrivener/stage2-planning-packet.md`
+1. continue Stage 2 planning and gate-hardening only under `docs/source-lanes/scrivener/stage2-planning-packet.md`, `docs/source-lanes/scrivener/stage2-manuscript-eligibility-scope.md`, `docs/source-lanes/scrivener/stage2-manuscript-vs-non-manuscript-boundary.md`, `docs/source-lanes/scrivener/stage2-evidence-and-gate.md`, `docs/source-lanes/scrivener/stage2-contract-packet.md`, and `docs/source-lanes/scrivener/stage2-fixture-acquisition-plan.md`
 2. acquire a compatibility-oriented or newer-version fixture
 3. acquire broader irregular coverage beyond the current corrupted-authority, missing-content, and multi-authority cases, such as partial-package or missing-auxiliary failure cases
 4. continue read-only comparison across the current active six-packet evidence surface
@@ -45,9 +45,16 @@ Do not draft a Scrivener admission ADR yet.
 Bounded Stage 1 authority recon is now implemented under `DECISIONS/0015-scrivener-stage1-authority-recon-authorization.md`.
 
 The post-implementation review in `docs/source-lanes/scrivener/stage1-post-implementation-review.md` concludes that the delivered slice stayed within authorization and may open Stage 2 planning only.
+Decision 0016 now reviews the current Stage 2 planning-control packet and explicitly keeps Stage 2 implementation blocked.
 
-The current Stage 2 planning boundary is now defined in `docs/source-lanes/scrivener/stage2-planning-packet.md`.
+The canonical Stage 2 planning packet is now `docs/source-lanes/scrivener/stage2-planning-packet.md`.
 The first companion Stage 2 scope note is now `docs/source-lanes/scrivener/stage2-manuscript-eligibility-scope.md`.
+The second Stage 2 scope note is now `docs/source-lanes/scrivener/stage2-manuscript-vs-non-manuscript-boundary.md`.
+The degraded-truth Stage 2 note is now `docs/source-lanes/scrivener/stage2-degraded-partial-truth-model.md`.
+The item-type inclusion/exclusion Stage 2 note is now `docs/source-lanes/scrivener/stage2-item-type-inclusion-exclusion.md`.
+The Stage 2 evidence-and-gate companion note is now `docs/source-lanes/scrivener/stage2-evidence-and-gate.md`.
+The Stage 2 contract companion note is now `docs/source-lanes/scrivener/stage2-contract-packet.md`.
+The Stage 2 fixture acquisition and evidence expansion plan is now `docs/source-lanes/scrivener/stage2-fixture-acquisition-plan.md`.
 
 Anything beyond Stage 1 remains blocked.
 

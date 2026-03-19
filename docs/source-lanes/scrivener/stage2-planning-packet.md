@@ -2,12 +2,13 @@
 
 ## Status
 
-Governance and planning note only.
+Canonical governance and planning packet.
 
 This packet opens Stage 2 planning only.
 It does not authorize Stage 2 implementation.
 It does not authorize extraction.
 It does not admit the Scrivener lane.
+`DECISIONS/0016-scrivener-stage2-implementation-remains-blocked.md` is the current explicit governance response to this packet.
 
 ## Purpose
 
@@ -17,12 +18,29 @@ This note defines the maximum truthful meaning of Scrivener Stage 2 in bounded C
 - a post-implementation review exists
 - that review concluded the repo may open Stage 2 planning only
 
+This file is the main Stage 2 planning surface.
+Companion notes may narrow evidence-and-gate and contract seams only.
+
 The planning question is narrow:
 
 - what could a bounded Stage 2 mean without collapsing into general Scrivener support?
 - what Stage 1 outcomes are solid enough to rely on?
 - what still blocks any Stage 2 implementation authorization?
 - what evidence, contract, and schema work would be required before implementation could even be considered?
+
+## Packet Structure
+
+The Stage 2 planning packet is intentionally small:
+
+- this file is the canonical Stage 2 planning packet
+- `docs/source-lanes/scrivener/stage2-evidence-and-gate.md` is the companion note that narrows evidence categories, gate conditions, and blocking findings
+- `docs/source-lanes/scrivener/stage2-contract-packet.md` is the companion note that narrows future result, output, refusal, degraded-case, and minimal schema-planning boundaries
+- `docs/source-lanes/scrivener/stage2-fixture-acquisition-plan.md` is the bounded fixture and evidence program that turns the Stage 2 packet into concrete acquisition waves only
+
+Those companion notes do not create separate implementation authority.
+They only tighten sections of this packet.
+The fixture-acquisition plan also does not create implementation authority.
+It only sequences evidence growth.
 
 ## 1. Maximum Truthful Stage 2 Scope
 
@@ -93,6 +111,12 @@ The repo would need additional evidence before any Stage 2 implementation could 
 The current sanitized and restricted evidence packet is enough for planning.
 It is not enough for implementation authorization by itself.
 
+The current Stage 2 evidence-and-gate control surface is now defined in:
+
+- `docs/source-lanes/scrivener/stage2-evidence-and-gate.md`
+
+That companion note narrows evidence categories, gate conditions, and blocking findings only.
+
 ## 5. Contract And Schema Planning Needs
 
 Before implementation, Stage 2 planning would need to produce at least:
@@ -100,11 +124,25 @@ Before implementation, Stage 2 planning would need to produce at least:
 - one bounded Stage 2 scope note defining what counts as manuscript-eligible observation
 - one manuscript-vs-non-manuscript boundary note defining inclusion and exclusion pressure
 - one degraded or partial extraction truth note defining when `ready`, `partial_success`, or continued `unavailable` could ever be honest
+- one item-type inclusion and exclusion note defining which observed classes could ever enter the first slice and which remain structural-only or excluded
 - one Stage 2 contract draft describing the maximum truthful result shape for any future manuscript-eligible extraction slice
 
 The first of these planning artifacts is now defined in:
 
 - `docs/source-lanes/scrivener/stage2-manuscript-eligibility-scope.md`
+- `docs/source-lanes/scrivener/stage2-manuscript-vs-non-manuscript-boundary.md`
+- `docs/source-lanes/scrivener/stage2-degraded-partial-truth-model.md`
+- `docs/source-lanes/scrivener/stage2-item-type-inclusion-exclusion.md`
+
+The next control-layer packet that turns these needs into an explicit pre-implementation gate is now:
+
+- `docs/source-lanes/scrivener/stage2-evidence-and-gate.md`
+
+The current Stage 2 contract packet for future result, refusal, and degraded-case boundaries is now:
+
+- `docs/source-lanes/scrivener/stage2-contract-packet.md`
+
+That companion note narrows future output and refusal boundaries only.
 
 Schema planning, if it becomes necessary, must remain minimal.
 
@@ -140,7 +178,10 @@ Any future Stage 2 implementation would still require a separate explicit govern
 - Stage 2 contract and semantics artifacts
 - a narrowed implementation gate showing why the next slice is safe to build
 
-Until such a decision exists, Cortex remains capped at the implemented Stage 1 Scrivener authority-recon slice.
+That separate governance decision now exists as `DECISIONS/0016-scrivener-stage2-implementation-remains-blocked.md`.
+It concludes that the current packet is strong enough for explicit review but not yet strong enough for implementation authorization.
+
+Until materially broader evidence exists and a later decision supersedes Decision 0016, Cortex remains capped at the implemented Stage 1 Scrivener authority-recon slice.
 
 ## 8. Immediate Next Legitimate Planning Move
 
@@ -148,8 +189,6 @@ The next legitimate move after this packet is not code.
 
 It is one of the following planning/evidence actions only:
 
-- draft the manuscript-vs-non-manuscript boundary note
-- draft the degraded or partial extraction truth note
-- acquire the next compatibility-oriented or item-type-diverse fixture packet needed by this plan
+- execute Wave 1 acquisition under `docs/source-lanes/scrivener/stage2-fixture-acquisition-plan.md`
 
-All three remain governance or evidence work, not implementation.
+That remains evidence work only, not implementation.

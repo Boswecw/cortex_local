@@ -1,6 +1,6 @@
 # Cortex - System Documentation
 
-**Document version:** 1.11 (2026-03-19) - Aligned to current constitutional and runtime repo state
+**Document version:** 1.12 (2026-03-19) - Aligned to current constitutional and runtime repo state
 **Protocol:** Forge Documentation Protocol v1
 
 | Key | Value |
@@ -10,7 +10,7 @@
 | **Output** | `doc/cxSYSTEM.md` |
 
 This `doc/system/` tree is the assembled system reference for Cortex as a bounded local file-intelligence service.
-It reflects the current repo state through Wave 3 hardening, audit-remediation tightening, the shared source-lane framework, Runtime Slices 1 through 9, the post-Slice-7 hardening and lane-admission-governance pass, bounded ODT lane delivery, bounded EPUB lane delivery, the post-Slice-8 governance execution, the post-Slice-9 governance selection, and the bounded special-track Scrivener Stage 1 authority-recon runtime slice.
+It reflects the current repo state through Wave 3 hardening, audit-remediation tightening, the shared source-lane framework, Runtime Slices 1 through 9, the post-Slice-7 hardening and lane-admission-governance pass, bounded ODT lane delivery, bounded EPUB lane delivery, the post-Slice-8 governance execution, the post-Slice-9 governance selection, the bounded special-track Scrivener Stage 1 authority-recon runtime slice, the current Scrivener Stage 2 planning-control packet, and the explicit Stage 2 implementation-remains-blocked decision.
 
 Assembly contract:
 
@@ -542,6 +542,27 @@ The current special-track implementation phase adds:
 
 This phase does not add Scrivener extraction, manuscript-policy handling, generalized Scrivener schemas, or lane admission.
 
+## Scrivener Stage 2 planning-control packet
+
+The current post-Stage-1 governance phase adds:
+
+- one canonical Scrivener Stage 2 planning packet
+- companion Stage 2 evidence-and-gate, contract, manuscript-boundary, degraded-truth, and item-type control notes
+- one bounded fixture acquisition and evidence expansion plan that sequences compatibility, boundary, and degraded-case evidence growth
+
+This phase opens Stage 2 planning only.
+It does not add runtime behavior, extraction authority, schema changes, or lane admission.
+
+## Scrivener Stage 2 implementation-remains-blocked decision
+
+The current governance response adds:
+
+- one explicit decision reviewing the current Scrivener Stage 2 planning-control packet
+- one explicit determination that Stage 2 implementation remains blocked
+- explicit preservation of fail-closed posture until compatibility, mapping, boundary, degraded-truth, and dependency evidence are materially broader
+
+This phase does not add runtime behavior, extraction authority, schema changes, or lane admission.
+
 ## Delivery order
 
 The current delivery order remains:
@@ -579,6 +600,8 @@ This baseline has also been hardened for contract symmetry, operator consistency
 EPUB is now admitted as a bounded local source lane.
 Scrivener remains a special-track project-source opening rather than an admitted source lane.
 Only the bounded Stage 1 authority-recon runtime slice is implemented.
+The current Scrivener Stage 2 packet is planning and control only.
+Decision 0016 keeps Stage 2 implementation blocked pending materially broader evidence.
 HTML remains deferred.
 No further implementation target is implied by this system reference alone beyond that bounded Stage 1 authorization.
 Any future lane work must still be explicit, narrow, and anchored to the governing plan rather than inferred from planning momentum alone.

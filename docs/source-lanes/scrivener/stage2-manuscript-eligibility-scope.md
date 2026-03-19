@@ -137,6 +137,8 @@ It is only a bounded scope note for one planning seam.
 
 The next legitimate planning move after this note is:
 
-- draft the manuscript-vs-non-manuscript boundary note
+- draft the degraded or partial extraction truth-model note
 
-That follow-on note should define how draft, research, trash, template, bookmarks, and auxiliary surfaces interact when item roles are mixed or boundary pressure is high.
+The manuscript-vs-non-manuscript boundary note now exists in:
+
+- `docs/source-lanes/scrivener/stage2-manuscript-vs-non-manuscript-boundary.md`

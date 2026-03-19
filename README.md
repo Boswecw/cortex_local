@@ -30,6 +30,7 @@ Current status:
 - Post-Slice-8 governance selection executed through Slice 9; EPUB is now admitted
 - Post-Slice-9 governance selection completed; Scrivener is now the next planning target on a special-track project-source path, and HTML remains deferred
 - Special-track Scrivener Stage 1 authority recon runtime slice implemented; Scrivener remains unadmitted, and extraction plus broader Scrivener implementation remain blocked
+- Current Scrivener Stage 2 planning-control packet has now been reviewed explicitly; Decision 0016 keeps Stage 2 implementation blocked pending materially broader evidence
 
 Start here:
 
@@ -104,3 +105,4 @@ Admission governance:
 - review the Scrivener three-project comparative evidence review: `docs/source-lanes/scrivener/three-project-comparative-evidence-review.md`
 - review the post-Slice-9 selection ADR: `DECISIONS/0014-next-lane-selection-after-slice9.md`
 - review the Stage 1-only Scrivener authorization ADR: `DECISIONS/0015-scrivener-stage1-authority-recon-authorization.md`
+- review the current Stage 2 authorization-review ADR: `DECISIONS/0016-scrivener-stage2-implementation-remains-blocked.md`

@@ -31,9 +31,19 @@ This draft still does not authorize extraction or lane admission.
 The next governance layer after Stage 1 is now defined in:
 
 - `docs/source-lanes/scrivener/stage2-planning-packet.md`
+- `docs/source-lanes/scrivener/stage2-evidence-and-gate.md`
+- `docs/source-lanes/scrivener/stage2-contract-packet.md`
 
-That packet opens Stage 2 planning only.
-It does not authorize Stage 2 implementation.
+The first file above is the canonical Stage 2 planning packet.
+The latter two are companion notes that narrow the evidence/gate and contract seams only.
+Those packets open and constrain Stage 2 planning only.
+Those packets do not authorize Stage 2 implementation.
+
+The current explicit governance response to that packet is now:
+
+- `DECISIONS/0016-scrivener-stage2-implementation-remains-blocked.md`
+
+That decision concludes the current packet is strong enough for an explicit review but still not strong enough to authorize Stage 2 implementation.
 
 ## 1. Lane identity
 
