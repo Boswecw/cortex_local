@@ -1,0 +1,6 @@
+# cortex_runtime core
+jsonschema>=4.21
+
+# Cortex AuthorForge service surface (service/)
+fastapi>=0.109,<1.0
+uvicorn>=0.27,<1.0
