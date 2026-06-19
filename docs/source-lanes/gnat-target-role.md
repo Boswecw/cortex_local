@@ -2,7 +2,7 @@
 
 ## Status
 
-Target role opened; runtime not promoted.
+Contract schemas promoted; runtime not promoted.
 
 ## Source Authority
 
@@ -36,7 +36,7 @@ The support target role is limited to:
 
 ## Explicit Non-Goals
 
-This target role does not authorize:
+This contract-schema promotion does not authorize:
 
 - copying GNAT runtime code into support in this slice
 - adding service endpoints
@@ -46,9 +46,19 @@ This target role does not authorize:
 - persisting durable records when DF Local owns storage/cache mechanics
 - emitting semantic labels or candidate meaning
 
-## Promotion Gate
+## Promoted Contract Files
 
-Before any GNAT file is promoted into app support, the promotion slice must name:
+This slice promotes the GNAT contract schemas and their valid/invalid contract
+fixtures into app support:
+
+- `schemas/gnat-*.schema.json`
+- `tests/contracts/fixtures/valid/gnat-*.json`
+- `tests/contracts/fixtures/invalid/gnat-*.json`
+
+## Runtime Promotion Gate
+
+Before any GNAT runtime file is promoted into app support, the promotion slice
+must name:
 
 - exact files to promote
 - source proof command
@@ -57,4 +67,5 @@ Before any GNAT file is promoted into app support, the promotion slice must name
 - post-promotion drift report
 - rollback path
 
-Until that gate exists, GNAT remains `source_local_hold` in the promotion ledger.
+Until that gate exists, GNAT runtime remains `source_local_hold` in the
+promotion ledger.
