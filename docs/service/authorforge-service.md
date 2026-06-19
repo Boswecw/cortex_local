@@ -2,7 +2,7 @@
 
 A bounded HTTP front door over `cortex_runtime` exposing exactly the
 file-intelligence seam AuthorForge consumes. It adds **no semantics**, no
-workflow control, and no durable truth (ADR 0004 — syntax before semantics).
+workflow control, and no durable truth (ADR 0004 - syntax before semantics).
 
 ## Run
 
@@ -13,7 +13,7 @@ python -m service                       # binds 127.0.0.1:8004
 CORTEX_SERVICE_PORT=8010 python -m service
 ```
 
-Loopback-only by default — Cortex receives manuscript/file text and must not be
+Loopback-only by default - Cortex receives manuscript/file text and must not be
 exposed off-host.
 
 Point AuthorForge at it with `CORTEX_URL=http://localhost:8004`.
@@ -26,7 +26,7 @@ Point AuthorForge at it with `CORTEX_URL=http://localhost:8004`.
 | GET | `/api/v1/authorforge/pdf-lane-probe` | Host admission probe (`pdfinfo`/`pdftotext` presence) |
 | POST | `/api/v1/authorforge/admit-and-extract` | Admit a base64 file, return an `ExtractionPacket` |
 | POST | `/api/v1/authorforge/prepare-for-retrieval` | Retrieval-package chunks for a prior `extraction_id` |
-| POST | `/api/v1/authorforge/lore-entity-extraction` | **Refuses** — semantic step belongs to NeuronForge |
+| POST | `/api/v1/authorforge/lore-entity-extraction` | **Refuses** - semantic step belongs to NeuronForge |
 
 ### admit-and-extract
 
@@ -40,7 +40,7 @@ admitted MIME types (`text/plain`, `text/markdown`, `.docx`, `application/pdf`,
 Request: `{ extraction_id, project_id }`. References a prior extraction held in a
 **bounded, TTL'd** in-memory cache (`CORTEX_EXTRACTION_TTL_SECONDS`, default
 3600; `CORTEX_EXTRACTION_CACHE_MAX`, default 256). Unknown/expired ids return a
-`denied` retrieval-package — no silent empty success.
+`denied` retrieval-package - no silent empty success.
 
 ### lore-entity-extraction
 
