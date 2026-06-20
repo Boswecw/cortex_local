@@ -2,4 +2,9 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 
+# PyInstaller freeze artifacts (packaging/ sidecar build for AuthorForge)
+.venv-freeze/
+packaging/dist/
+packaging/build/
+
 context-bundle.md
