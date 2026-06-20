@@ -100,6 +100,33 @@
         }
       }
     },
+    "nil_block_anchors": {
+      "type": "array",
+      "description": "Optional NIL block identity + evidence anchors for the handed-off artifact. Syntax-only provenance carried for AuthorForge's NIL extraction lineage — anchors locate candidate evidence in editor blocks; they are candidate provenance, never canonical authority.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["block_id", "block_hash"],
+        "properties": {
+          "block_id": { "type": "string", "minLength": 1, "maxLength": 200 },
+          "block_hash": { "type": "string", "minLength": 16, "maxLength": 128 },
+          "evidence_anchors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["anchor_id", "char_start", "char_end"],
+              "properties": {
+                "anchor_id": { "type": "string", "minLength": 1, "maxLength": 200 },
+                "char_start": { "type": "integer", "minimum": 0 },
+                "char_end": { "type": "integer", "minimum": 0 },
+                "quote": { "type": "string", "maxLength": 2000 }
+              }
+            }
+          }
+        }
+      }
+    },
     "explicit_request": {
       "type": "object",
       "additionalProperties": false,
