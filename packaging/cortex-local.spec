@@ -19,12 +19,24 @@
 #               Draft 2020-12 validator loads through importlib.resources.
 
 import os
+import sys
 
 from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 
 # SPECPATH is the directory holding this spec (…/packaging); the repo root is its
 # parent. Anchor every path to it so the build is invocation-directory agnostic.
 repo_root = os.path.dirname(SPECPATH)
+
+# The `pyinstaller` console-script does NOT put the build cwd on sys.path, so
+# collect_submodules("cortex_runtime" / "service") below would import nothing and
+# return [] — silently dropping any submodule reached only via
+# importlib.import_module(<string>). That is exactly how
+# cortex_runtime.scrivener_authority_recon (enumerated by
+# service_status._implemented_runtime_slices) was being left out of the freeze,
+# making the Scrivener Stage 1 slice report "unavailable" at runtime even though
+# it is implemented. Put the repo root on the path so the packages are importable
+# and their submodules are actually collected.
+sys.path.insert(0, repo_root)
 
 hiddenimports = []
 hiddenimports += collect_submodules("uvicorn")
