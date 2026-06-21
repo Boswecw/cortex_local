@@ -1,0 +1,107 @@
+schema_version: "RepoManifest.v1"
+
+repo:
+  full_name: "Boswecw/cortex_local"
+  local_name: "cortex"
+  package_name: "cortex"
+  default_branch: "master"
+  repo_class: "local_file_intelligence_service"
+
+identity:
+  product_name: "Cortex"
+  one_line: "Bounded local file-intelligence, extraction, retrieval-preparation, and handoff-support service for Forge applications."
+  authority_role: "local_file_intelligence_and_retrieval_preparation"
+
+owns:
+  - local source-lane admission truth
+  - bounded local intake validation
+  - syntax-level extraction support
+  - retrieval package preparation
+  - service-status truth for admitted local file surfaces
+  - GNAT status summary support for AuthorForge-visible local support health
+
+does_not_own:
+  - semantic authoring decisions
+  - model routing or inference execution
+  - canonical ecosystem memory
+  - durable promotion authority
+  - public application UX
+  - command-plane operator authority
+
+upstream_authorities:
+  Forge Local Runtime:
+    owns: "shared local-runtime doctrine, boundary vocabulary, degraded-state language, and cross-service service-only posture"
+  AuthorForge:
+    owns: "writer workflow, manuscript acceptance, and public product UX"
+  DataForge Local:
+    owns: "local operational memory and syncable evidence"
+  forge_contract_core:
+    owns: "shared schemas, validators, and contract versioning"
+
+downstream_consumers:
+  - AuthorForge
+  - Forge_Command
+  - NeuronForge
+  - FA Local
+
+canonical_files:
+  - repo.manifest.yaml
+  - README.md
+  - PROJECT_CHARTER.md
+  - LOCAL_DOCTRINE.md
+  - AUTHORITY_BOUNDARIES.md
+  - SERVICE_DOMAINS.md
+  - doc/CRTSYSTEM.md
+  - doc/system/_index.md
+  - schemas/service-status.schema.json
+  - Makefile
+
+generated_files:
+  - AGENTS.md
+  - CLAUDE.md
+  - CODEX.md
+  - GEMINI.md
+
+agent_edit_policy:
+  may_edit:
+    - cortex_runtime/**
+    - service/**
+    - tests/**
+    - schemas/**
+    - docs/**
+    - doc/system/**
+    - scripts/**
+  must_not_edit_directly:
+    - AGENTS.md
+    - CLAUDE.md
+    - CODEX.md
+    - GEMINI.md
+  must_regenerate:
+    - AGENTS.md
+    - CLAUDE.md
+    - CODEX.md
+    - GEMINI.md
+
+verification:
+  required_identity_checks:
+    - repository_full_name
+    - local_directory_name
+    - package_name
+    - README title
+    - default_branch
+    - canonical_files_exist
+    - generated_instruction_hashes_match
+  test_commands:
+    - python3 scripts/validate_schemas.py
+    - make test-runtime
+  build_commands:
+    - bash doc/system/BUILD.sh
+  safety_rules:
+    - "Cortex emits bounded local file-intelligence and retrieval-preparation artifacts; it does not make semantic authoring decisions."
+    - "Source-lane admission must stay explicit, contract-backed, and fail-closed."
+    - "Service status must be truthful about blocked, degraded, unadmitted, and unavailable surfaces."
+    - "GNAT support surfaces expose only support-safe summary state, not source-local planners, workers, runners, or raw semantic authority."
+  llm_rules:
+    - "Start from the real repo root at /home/charlie/Forge/apps/public-app-local-support/cortex."
+    - "When promoting from ecosystem/local-systems, keep Cortex app-support copies bounded and support-safe."
+    - "Do not collapse retrieval preparation, inference, and app UX authority into this repo."

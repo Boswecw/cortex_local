@@ -7,7 +7,7 @@ Manifest hash: sha256:3c1f9f3fac4053f9b02f3d42e64981f9386c6ea66db751b46f97de6a93
 Receipt: receipts/repo-context/latest.json
 -->
 
-# CLAUDE.md - Cortex Agent Instructions
+# CODEX.md - Cortex Agent Instructions
 
 ## Repo Identity
 
