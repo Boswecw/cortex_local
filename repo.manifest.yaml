@@ -1,7 +1,7 @@
 schema_version: "RepoManifest.v1"
 
 repo:
-  full_name: "Boswecw/cortex_local"
+  full_name: "Boswell-Digital-Solutions/cortex_local"
   local_name: "cortex"
   package_name: "cortex"
   default_branch: "master"
